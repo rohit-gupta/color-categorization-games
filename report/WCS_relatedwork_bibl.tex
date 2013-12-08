@@ -1,0 +1,494 @@
+%% LyX 2.0.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[11pt,a4paper,english]{article}
+\usepackage[cp1250]{inputenc}
+\pagestyle{plain}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage[english]{babel}
+\usepackage{a4wide}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{Modeling basic color term usage\\
+as similarity-maximization games\\
+{\large Final project for ``Language and Games''}}
+
+
+\author{José Pedro Correia\\
+(No. 10232095) MSc Logic \and Radek Ocelák\\
+(No. XXXXXXX) MSc Logic}
+
+\maketitle
+
+\section{The World Color Survey and the facts to be explained}
+
+Berlin and Kay \cite{Berlin69} pioneered a long tradition of research
+into color term systems of world's languages. This broad typological
+study pointed out that there clearly are universal tendencies concerning
+repertoires of basic color terms in particular languages. The essential
+claim for our purposes is an evolutionary one: there is a cross-linguistically
+universal order in which color vocabularies are enriched by new terms.
+The order of emergence is captured by the following implicational
+hierarchy of universals:
+
+{[}white, black{]} $<$ {[}red{]} $<$ {[}green, yellow{]} $<$ {[}blue{]}
+$<$ {[}brown{]} $<$ {[}purple, pink, orange, gray{]}
+
+This hierarchy expresses a claimed complex constraint on all existing
+natural languages. It should be read as follows: if a language has
+a well-established term for red (that is, a term covering the point
+of the color space which is the prototypical denotation of the English
+“red”), it also has basic terms for white and for black, but not necessarily
+\textit{vice versa}. Similarly, if it has one for green or for yellow,
+it also has one for red, and so on. According to this picture, color
+term systems are far from being relativistically arbitrary: whatever
+number of terms they contain, these terms can carve the color space
+only in certain ways. For example, in a language with three color
+terms, these are bound to cover, respectively, red, black, and white.
+Full partition of the color space is claimed, so the English terms
+are in fact misleading. In the last case, the term for red is likely
+to cover violet or orange as well and the other two terms would rather
+correspond to “dark” and “light”.
+
+In order to examine the main theses of the founding study, the World
+Color Survey (WCS, a comprehensive monograph is \cite{WCS}) was conducted
+in the subsequent decades. It substantially broadened the empirical
+base and improved the methodology of the previous work, performing
+field research for 110 unwritten languages (listed in \cite{Reg05})
+with a negligible level of genetic interrelatedness, with 24 informants
+per language on average. (Cf. \cite{KayEnc} for methodology.) The
+employed color system was one of 330 Munsell chips, 320 of them in
+the Lenneberg and Roberts array of 40 hue columns and 8 levels of
+lightness, at maximum saturation, plus an achromatic column of 10
+chips from white to black.
+
+The results of the WCS concerning the universality of color terms
+emergence can be found in Kay and Maffi \cite{Kay99}. Here, the empirically
+documented color term systems are classified into 9 types in 5 stages
+with respect to how six focal points of the color space (prototypical
+denotations of the English “white”, “red”, “yellow”, “green”, “blue”,
+“black”) are grouped by the vocabulary of each particular language.
+For instance, in Stage II (languages with 3 basic color terms) there
+is only one observed type, {[}white; red+yellow; black+green+blue{]};
+in Stage III (4 color terms) there are the types {[}W; R; Y; Bk+G+Bu{]},
+{[}W, R+Y, G+Bu, Bk{]} and {[}W, R, Y+G+Bu; Bk{]}. The authors note
+that there are five possible evolutionary trajectories between stages
+I to V, assuming that any evolutionary step consists in splitting
+the denotation (the covered focal points) of one term of the previous
+system in two. The trajectory {[}W+R+Y; Bk+G+Bu{]} $>$ {[}W, R+Y,
+Bk+G+Bu{]} $>$ {[}W, R+Y, G+Bu, Bk{]} $>$ {[}W; R; Y; G+Bu; Bk{]}
+$>$ {[}W; R; Y; G; Bu; Bk{]} is the most represented one in the WCS,
+capturing 91 of the 110 languages.%
+\footnote{As one type can be shared by more trajectories, the languages captured
+by all these trajectories do not add up to 110, or 100\%.%
+}
+
+The way the empirical results are presented requires some discussion.
+The talk of evolutionary paths as instantiated by the languages is
+slightly misleading: what was really observed was in each case a static
+color term system belonging to one of the 9 types, or to a transition
+between two of them. These observed transitions are the maximum of
+diachrony captured in the WCS; apart from this we cannot infer anything
+about how a particular observed color vocabulary actually came about.
+This having been clarifed, the formulation in terms of these emergence
+trajectories and the representation of the particular types seems
+more appropriate than the original strong formulation in terms of
+implicational hierarchy. First, it draws attention to the almost universal%
+\footnote{Rare exceptions are discussed in section 3 of \cite{Kay99}.%
+} principle of partitioning the color space by the available terms,
+and consequently to the fact that if a color vocabulary is enriched
+with an additional term, the denotation of some or all of the already
+established terms is likely to be modified. Second, the gathered data
+do not seem univocal enough to formulate an implicational hierarchy
+as strong as that of Berlin and Kay \cite{Berlin69}, and anyway,
+in order to formulate any such generalization, the data would have
+to be statistically evaluated with this in mind. Admittedly, an overall
+quantitative evaluation of the WCS data has been done \cite{Kay03,Reg05}
+and it has shown a clear non-random match among color term systems
+of world's languages, thus refuting the position of full relativism
+in this respect. But whether \textit{particular} generalizations (implicative
+or other) are valid is an altogether different question. We conjecture
+that a consequential part of the original hierarchy would not find
+a significant support in the data, since in the sample there are relatively
+little languages spread among the types with 4 or less color terms,
+as opposed to about 80 languages with 5 terms, 6 terms or inbetween.
+
+In the general lack of statistically conclusive support for individual
+universal features of human color categorization, we will focus on
+the two of them that can be most reliably inferred from the absolute
+numbers reported in Kay and Maffi \cite{Kay99}. One is that 3-term
+vocabularies tend to partition the color space according to the scheme
+{[}W; R+Y; Bk+G+Bu{]}, that is, to separate the warm colors while
+keeping the cool colors together with black. This is the only reported
+type for Stage II, instantiated by 6 languages. The other universal
+feature to focus on is the evolutionarily late division of green and
+blue: {[}W; R; Y, G+Bu; Bk{]} is by far the most represented type
+of 5-term systems (Stage IV), instantiated by 41 languages. The strong
+universal tendencies to carve up the color space in the described
+way when, respectively, three and five color terms are available will
+be in the following regarded as the most obvious, or secure, empirical
+facts to be explained. Besides qualitative evaluation based on this
+finding, we will evaluate our model in a more refined, quantitative
+way, against the detailed WCS data for particular languages \cite{WCSdata}.%It could be even argued that a model which can account for these specific facts will, in turn, be able to indicate something about the evolutionary stages, such as the hypothetical Stage I, for which empirical evidence is missing.
+
+
+
+\section{Related work}
+
+The general debate on the nature of cognitive categories is dominated
+by three competing paradigms, nativism, empiricism and culturalism,
+the third often presented as a solution to the aged dilemma between
+the first two (cf. \cite{Steels05} and the references there). The
+debate on color categorization, specifically, is furthermore structured
+along the dimension of universality vs. relativity, which is arguably
+a distinct one, despite affinities such as that between nativism and
+universalism. The WCS has posed this question as straightforwardly
+empirical and provided data; as a result, recent positions on both
+the universalist \cite{Kay03,Reg05} and the relativist \cite{Rob05}
+side are rather moderate.
+
+Granted that there \textit{are} universal tendencies in color categorization,
+explanation of these (and of the remaining relativity) has been approached
+in several ways. Kay and Maffi \cite{Kay99} themselves present an
+updated version of a model that had been continuously developed by
+the WCS authors, on the (close to) nativist assumption of 6 naturally
+focal colors. The issue has been also studied within the broadly culturalist
+framework of the Iterated Learning Model \cite{Smith03,Dowm07}. However,
+here we will only discuss in detail the approaches that directly motivate
+our own model, in which the emergence of categories is conceived in
+terms of cultural interaction on the basis of innate characteristics
+of human perception. In a nutshell, these are works \cite{Baron10}
+and \cite{Lor12}, focusing on the impact of perceptual constraints
+on routinized cultural interaction; the more recent work \cite{Reg07}
+of the WCS authors investigating partitions of the perceptual space
+in terms of optimality; and Jäger and van Rooij's \cite{Rooij07}
+proposal to treat the issue in game-theoretical terms. Moreover, in
+the final section on prospects we discuss one additional, empiricist
+approach, to motivate a possible extension of our model.
+
+The first two of our motivating approaches jointly assume that universality
+of categorization might be explainable in terms of specific characteristics
+of human visual perception. We discuss, first, Baronchelli et al.
+\cite{Baron10} and Loreto et al. \cite{Lor12}, who attempt to derive
+the universals from a particular formulation of the dependence of
+perception on the physical character of the input. Then we outline
+the explanatory strategy of Regier, Kay and Khetarpal \cite{Reg07},
+which appears to be a more general, though in a sense less elaborated,
+version of the former.
+
+
+\subsection{Just Noticeable Difference}
+
+\cite{Baron10}, as well as \cite{Lor12}, appeal in explanation to
+a simple characteristic of human visual perception, called Just Noticeable
+Difference (JND). The human JND is a psychophysiologically determined
+function which for any given wavelength from the extent of the visible
+spectrum gives the minimal difference in wavelength of two hues that
+are distinguishable by human eye in that particular region of the
+spectrum. This function is implemented as a constraint on cultural
+interaction of artificial agents, conceived roughly along the lines
+of Steels and Belpaeme's \cite{Steels05} ''culturalist model''.
+In this setting, color term vocabularies and categorical systems of
+individual agents in a population are made to co-evolve through their
+repetitive participation in standardized linguistic interaction over
+empirical input (''the Category Game''). Similarity between the
+emergent systems and those observed empirically is then supposed to
+vindicate the explanatory role of the human JND.
+
+Despite general formulations (“excellent quantitative agreement” with
+the WCS data), Baronchelli et al. are successful only in a specific
+sense. Their simulation does not demonstrate for particular universal
+features of human color categorization how these might have been arrived
+at. It shows only that categorical systems developed via cultural
+interaction constrained by the human JND are less dispersed across
+populations than when a flat, non-human JND is used. The only quantitative
+agreement, then, is between the ratio of the two respective values
+of dispersion, and the dispersion ratio of the actually observed categorical
+systems of the WCS, compared to a specific randomization of these
+(as in \cite{Kay03}). The agreement of these two ratios on $\sim$1.14
+is remarkable, but hard to interpret in isolation. %both these values are construed in such a complicated fashion that proper interpretation of the match can hardly be straightforward. RO: I insist upon this, though it may not sound as a correct argument. The thing is that evolution in silica, according to a specific dynamic, is something quite different and trasparent in comparison with the overall evolution of world's languages with the immense number of participating factors (including genetic relations, language contact, wars and whatever). While in some respects the artificial dynamic may be almost reasonable model for the latter, I'm pretty sure that from an out-of-the-blue coincidence of two similarly constructed numbers describing outcomes of these two processes absolutely nothing can be inferred.
+
+
+Loreto et al. \cite{Lor12} come somewhat closer to explanation of
+particular universals of color categorization. The human JND as a
+constraint on routine language interaction over empirical input is
+sufficient for them to derive a hierarchy of color terms according
+to the time it takes for color terms in various regions of the visible
+spectrum to be agreed upon within the population. The announced “excellent
+quantitative agreement with the empirical observations of the WCS”
+is concealed from the reader. But the authors rightly point out that
+their hierarchy, {[}red, (magenta)-red{]} $<$ {[}violet{]} $<$ {[}green/yellow{]}
+$<$ {[}blue{]} $<$ {[}orange{]} $<$ {[}cyan{]}, is similar to the
+implicational hierarchy of Berlin and Kay \cite{Berlin69}. Let us
+discuss the relevance of this finding.
+
+First, there seems to be a methodological problem with choice of color
+terms and their matching to regions of the spectrum. This should,
+arguably, have been done either by selecting a set of cross-linguistically
+basic colors and locating them in the spectrum, or by selecting important
+points or sections of the JND function and reading off the respective
+colors; but an opaque combination of both seems to have taken place.
+In the first case we would expect both green and yellow in the selection,
+instead of green/yellow, and we might challenge the inclusion of cyan
+and (magenta)-red. In the second case, while most of the selected
+points reflect peaks and valleys of the function, (magenta)-red does
+not, violet and red are disputable, and there is an unreflected valley
+between violet and blue. Some of this could be actually resolved in
+favor of the parallel between the achieved hierarchy and Berlin and
+Kay's hierarchy; first of all, there are reasons to pick only red
+for the experiment, instead of red, (magenta)-red and violet. But
+there remains the problem that green/yellow in the achieved hierarchy
+is a single transitional color, while in Berlin and Kay's hierarchy
+green and yellow are two distinct colors occupying the same position.
+
+Moreover, let us remind that Berlin and Kay \cite{Berlin69} is a
+dated reference and there is little point in evaluating explanatory
+proposals concerning universals of color categorization against the
+hierarchy stated there, in presence of the WCS data, the superiority
+of which is both empirical and methodological. Our conclusions in
+Section ... indicate that the mismatch between Loreto, Mukherjee and
+Tria's \cite{Lor12} actual findings and the cross-linguistic reality
+would have been magnified by an up-to-date evaluation, rather than
+attenuated. While we believe that the features of human perception
+that are captured by the JND function should play an important explanatory
+role regarding linguistic universals, the two papers just discussed
+do not more than indicate so.
+
+
+\subsection{The CIELAB space}
+
+The previous approach appeals to a particular feature of human perception
+(the resolution power in different frequencies of visible light).
+The explanatory strategy adopted by Regier, Kay and Khetarpal \cite{Reg07},
+with reference to \cite{Jam97}, is a more general version of that.
+Instead of carving up a physically defined space (one-dimensional
+in the previous case), they consider partitions of the psychologically
+relevant, 3D color space CIELAB, which is designed so that standard
+Euclidean distance of two hues corresponds to their psychological
+dissimilarity. In this, the human JND is encompassed rather than discarded
+as a source of explanation, for what it expresses has to be involved
+also in construction of any psychologically relevant space. When the
+Munsell color palette used in the WCS is projected into the CIELAB
+space, its chips mark the surface of an irregular sphere there. What
+is then discussed are partitions of the set of color points thus arranged.
+The authors convincingly show a strong preference of the WCS languages
+for efficient partitions, efficient in terms of maximizing the compactness
+of their color categories in the CIELAB space. What this means is
+that the closer two chips are in the perceptual space, the more likely
+they will be lumped under the same color term.
+
+This is clearly an important result, pointing to optimality as an
+essential factor of color categorization. However, this line can be
+drawn further. Given the specific way of evaluation (each language's
+actual partition vs. its various rotations around the sphere), the
+results cannot directly account for any particular linguistic universal
+in question. For instance, we do not see whether the most efficient
+ways of partitioning the figure into 5 regions involve keeping blue
+and green together. Another issue is that optimality or efficiency
+is a static feature of a categorical system (of an individual speaker
+or of a language \textit{in abstracto}), without it being clear how
+it might have come about. In our approach we adopt the idea of the
+overall character of human visual perception, reflected in the CIELAB
+color space, as the likely source of universals of color categorization.
+For sake of comparability with the WCS data we also work with the
+projected Munsell palette. Instead of static assessment of optimality,
+though, we will be interested in an evolutionary, agent-based dynamic
+of cultural interaction, in the game-theoretic formulation proposed
+in \cite{Rooij07}, over empirical input located in the defined space.
+
+
+\subsection{Similarity-maximization games}
+
+Jäger and van Rooij \cite{Rooij07} construe the problem as a similarity-maximization
+signaling game. Nature picks a point from the color space as the meaning
+to be conveyed; the sender sends one term from a finite set to signal
+the chosen meaning to the receiver; the receiver interprets the received
+signal by choosing a point from the color space. The payoff this signalling
+action brings to both the sender and the receiver is a monotonically
+decreasing function of the distance of the receiver's interpretation
+from the intended meaning in the color space. In general, the sender
+strategy is a function from the set of points of the color space to
+(a probabilistic distribution over) the given set of terms, and the
+receiver strategy is a function from the set of terms to (a probabilistic
+distribution over) the set of points of the color space. If we let
+the game be played repetitively and relate payoffs from each particular
+game to the ''fitness'' of the sender and the receiver strategy
+employed in that game,%
+\footnote{Jäger and van Rooij motivate this by appeal to priming effects between
+sufficiently close coding and decoding strategies. We found their
+reasoning unconvincing: reinforcement via priming can take place between
+the sender and the receiver strategy of a single individual, but not
+interindividually, since the sender in a game has no access to the
+strategy of the receiver and \textit{vice versa}.%
+} or the probability that they will be employed in the next run, we
+get an evolutionary process with a specific dynamic. This process
+can be, in principle, viewed as a model of evolution of color categories
+in a community. How various parameters of such a model are to be set
+up is, of course, subject to discussion.
+
+We chose to base our evolutionary model in similarity-maximization
+signaling games, rather than in the Category Game of Steels and Belpaeme
+\cite{Steels05}, adopted in Baronchelli et al. \cite{Baron10} and
+Loreto et al. \cite{Lor12}. In the former setting, categories are
+inherently linguistic and can be unproblematically called ''concepts''
+as well. The latter approach, on the other hand, makes the conceptual
+distinction between perceptual and linguistic categories. Each agent,
+based on empirical input, individually divides a continuous perceptual
+space into regions (perceptual categories) within which she cannot
+further distinguish. A linguistic category then emerges through subsuming
+of adjacent perceptual categories under a single term. As perceptual
+categorization independent of language seems to be a problematic notion
+to us, we prefer the simpler formulation in terms of signaling games.
+Admittedly, we consider only the 320 (330?) Munsell chips as the color
+space, instead of the continuous space. This choice, motivated by
+its simplicity and good evaluability against the WCS data, can be
+seen as a preliminary perceptual categorization of the continuous
+space. However, a difference is that in our case the perceptual space
+is not carved up arbitrarily by individual agents, but uniformly and
+in roughly homogeneous way with respect to human resolution abilities.
+
+%\subsection{Empiristic explanation}
+%There has been a minor line of research focused at examination of purely empiristic views, trying to  derive realistic categorical systems from the distributions of colors in an individual agents' input. This has not proved fruitful. One can quite straightforwardly perform clustering experiments on color points sampled from realistic living sceneries, which is what has been done. But the ecological significance of a color need not correspond at all to its average share in the agent's visual field, and it is not clear how this factor could be reflected in empiristic experiments. Detached from this, the purely empiristic view has been refuted by Steels and Belpaeme \cite{Steels05},section V, after Yendrikhovskij's \cite{Yendr01} poorly substantiated claim that Berlin and Kay's \cite{Berlin69} color term hierarchy is derivable via empiristic clustering.
+
+
+%Steels and Belpaeme show that a realistic (as opposed to flat) chromatic distribution helps a population of empiristically learning agents to converge in their categorical repertoires, but is not a sufficiently strong factor to establish a full agreement.\footnote{But cf. Webster and Kay \cite{Webster05}, who in a commentary on Steels and Belpaeme note that full categorical agreement within a population does not occur in the reality of the WCS. To jump ahead, this suggests that the feedback mechanisms which in both game-theoretic settings described in Section ... care for intrapopulational sharing of categories might be too strong.} Even if it was, further, it would not yet present a ready explanation for universal tendencies in color categorization: the milieus of different language communities certainly vary with respect to color distribution (although we might expect certain universal tendencies even here). Moreover, they have found neither a correlation between sets of categories extracted from different realistic sceneries (namely, natural vs. urban), nor a correlation between such sets and the set of “basic human colour categories proposed in the literature”.
+
+
+%Otherwise, Steels and Belpaeme focus on different and more successful models of arriving at a shared repertoire of categories, particularly on a “culturalistic” model, which involves repetition of standardized linguistic interactions over empirical input.\footnote{They are not specifically interested in the evolutionary universals of color vocabularies.} In this, they only consider flat chromatic distribution and do not examine the potential influence of a realistic distribution on the cultural process. While we think that chromatic distribution as such cannot suffice as an explanation of universal tendencies in color categorization, based on Steels and Belpaeme's results we still believe it to be a possible supportive factor. The model we develop in this paper does not primarily belong to this “empiristic” line of research; however, an extension in this direction suggests itself as soon as we are prepared to accept possible multiple source of the linguistic universals in question.
+
+\subsection{Experimental results}
+
+% latex table generated in R 2.14.1 by xtable 1.7-0 package
+% Mon Jan 28 14:07:17 2013
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrrrr}
+  \hline
+ & Min. & 1st Qu. & Median & Mean & 3rd Qu. & Max. \\ 
+  \hline
+3 & 0.772 & 0.828 & 0.869 & 0.863 & 0.909 & 0.928 \\ 
+  4 & 0.328 & 0.569 & 0.658 & 0.644 & 0.713 & 0.834 \\ 
+  5 & 0.362 & 0.594 & 0.684 & 0.674 & 0.756 & 0.900 \\ 
+  6 & 0.394 & 0.575 & 0.659 & 0.652 & 0.728 & 0.878 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+% latex table generated in R 2.14.1 by xtable 1.7-0 package
+% Mon Jan 28 14:11:12 2013
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrrrr}
+  \hline
+ & Min. & 1st Qu. & Median & Mean & 3rd Qu. & Max. \\ 
+  \hline
+3 & 0.441 & 0.623 & 0.661 & 0.646 & 0.705 & 0.753 \\ 
+4 & 0.306 & 0.455 & 0.503 & 0.513 & 0.578 & 0.681 \\ 
+5 & 0.378 & 0.472 & 0.512 & 0.524 & 0.566 & 0.728 \\ 
+6 & 0.344 & 0.450 & 0.484 & 0.487 & 0.525 & 0.647 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+% latex table generated in R 2.14.1 by xtable 1.7-0 package
+% Wed Jan 30 22:59:20 2013
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrrrr}
+  \hline
+ & Min. & 1st Qu. & Median & Mean & 3rd Qu. & Max. \\ 
+  \hline
+3 & 0.375 & 0.542 & 0.588 & 0.582 & 0.631 & 0.744 \\ 
+4 & 0.309 & 0.423 & 0.473 & 0.470 & 0.514 & 0.613 \\ 
+5 & 0.287 & 0.384 & 0.431 & 0.431 & 0.478 & 0.575 \\ 
+6 & 0.319 & 0.416 & 0.450 & 0.450 & 0.484 & 0.625 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+% latex table generated in R 2.14.1 by xtable 1.7-0 package
+% Mon Jan 28 14:11:36 2013
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrrrr}
+  \hline
+ & Min. & 1st Qu. & Median & Mean & 3rd Qu. & Max. \\ 
+  \hline
+3 & 0.312 & 0.353 & 0.359 & 0.363 & 0.378 & 0.406 \\ 
+4 & 0.228 & 0.266 & 0.275 & 0.276 & 0.287 & 0.312 \\ 
+5 & 0.175 & 0.225 & 0.237 & 0.236 & 0.250 & 0.272 \\ 
+6 & 0.172 & 0.203 & 0.212 & 0.213 & 0.222 & 0.263 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+% latex table generated in R 2.14.1 by xtable 1.7-0 package
+% Mon Jan 28 14:14:40 2013
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrrrr}
+  \hline
+ & Min. & 1st Qu. & Median & Mean & 3rd Qu. & Max. \\ 
+  \hline
+1 & 0.666 & 0.698 & 0.711 & 0.710 & 0.724 & 0.750 \\ 
+  2 & 0.534 & 0.552 & 0.594 & 0.587 & 0.614 & 0.641 \\ 
+  3 & 0.506 & 0.554 & 0.641 & 0.605 & 0.643 & 0.675 \\ 
+  4 & 0.641 & 0.649 & 0.664 & 0.662 & 0.677 & 0.681 \\ 
+  5 & 0.441 & 0.447 & 0.463 & 0.477 & 0.502 & 0.541 \\ 
+  6 & 0.656 & 0.697 & 0.698 & 0.702 & 0.716 & 0.741 \\ 
+  7 & 0.622 & 0.645 & 0.658 & 0.665 & 0.680 & 0.725 \\ 
+  8 & 0.659 & 0.691 & 0.705 & 0.704 & 0.718 & 0.744 \\ 
+  9 & 0.581 & 0.627 & 0.634 & 0.642 & 0.654 & 0.719 \\ 
+  10 & 0.662 & 0.693 & 0.711 & 0.708 & 0.722 & 0.753 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+% latex table generated in R 2.14.1 by xtable 1.7-0 package
+% Mon Jan 28 14:20:02 2013
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{rrrrrrr}
+  \hline
+ & Bété & Ejagam & Kwerba & Nafaanra & Wobé & Yacouba \\ 
+  \hline
+1 & 0.728 & 0.713 & 0.750 & 0.666 & 0.694 & 0.709 \\ 
+  2 & 0.619 & 0.588 & 0.641 & 0.541 & 0.534 & 0.600 \\ 
+  3 & 0.644 & 0.641 & 0.675 & 0.506 & 0.525 & 0.641 \\ 
+  4 & 0.641 & 0.672 & 0.647 & 0.656 & 0.678 & 0.681 \\ 
+  5 & 0.541 & 0.512 & 0.441 & 0.469 & 0.456 & 0.444 \\ 
+  6 & 0.722 & 0.700 & 0.741 & 0.656 & 0.697 & 0.697 \\ 
+  7 & 0.684 & 0.666 & 0.622 & 0.650 & 0.725 & 0.644 \\ 
+  8 & 0.722 & 0.706 & 0.744 & 0.659 & 0.688 & 0.703 \\ 
+  9 & 0.637 & 0.659 & 0.581 & 0.631 & 0.719 & 0.625 \\ 
+  10 & 0.725 & 0.713 & 0.753 & 0.662 & 0.688 & 0.709 \\ 
+   \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+\bibliographystyle{plain}
+\bibliography{bibl}
+ 
+\end{document}

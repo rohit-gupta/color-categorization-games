@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: report_whole.aux
+The style file: plain.bst
+Database file #1: bibl.bib
+Warning--empty publisher in Kay97
+You've used 19 entries,
+            2118 wiz_defined-function locations,
+            632 strings with 6464 characters,
+and the built_in function-call counts, 6345 in all, are:
+= -- 606
+> -- 308
+< -- 1
++ -- 121
+- -- 99
+* -- 440
+:= -- 1092
+add.period$ -- 60
+call.type$ -- 19
+change.case$ -- 101
+chr.to.int$ -- 0
+cite$ -- 20
+duplicate$ -- 233
+empty$ -- 508
+format.name$ -- 99
+if$ -- 1329
+int.to.chr$ -- 0
+int.to.str$ -- 19
+missing$ -- 22
+newline$ -- 98
+num.names$ -- 44
+pop$ -- 100
+preamble$ -- 1
+purify$ -- 85
+quote$ -- 0
+skip$ -- 145
+stack$ -- 0
+substring$ -- 408
+swap$ -- 28
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 70
+warning$ -- 1
+while$ -- 56
+width$ -- 21
+write$ -- 210
+(There was 1 warning)

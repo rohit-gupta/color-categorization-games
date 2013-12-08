@@ -1,0 +1,6211 @@
+#LyX file created by tex2lyx 2.0.2
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{babel}
+\usepackage{babel}
+\usepackage{a4wide}
+
+
+
+
+
+\end_preamble
+\use_default_options false
+\language english
+\language_package default
+\inputencoding latin9
+\fontencoding T1
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref 1
+\pdf_bookmarks 1
+\pdf_bookmarksnumbered 0
+\pdf_bookmarksopen 0
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks 0
+\pdf_pdfborder 0
+\pdf_colorlinks 0
+\pdf_backref section
+\pdf_pdfusetitle 1
+\papersize a4paper
+\use_geometry false
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 0
+\use_mathdots 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+Modeling basic color term usage
+\begin_inset Newline newline
+\end_inset
+
+ with similarity-maximization games
+\end_layout
+
+\begin_layout Author
+
+José Pedro Correia
+\begin_inset Newline newline
+\end_inset
+
+ (No. 10232095) MSc Logic 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+and
+\end_layout
+
+\end_inset
+
+ Radek Océlak
+\begin_inset Newline newline
+\end_inset
+
+ (No. 10227709) MSc Logic
+\end_layout
+
+\begin_layout Abstract
+
+Basic color term usage in natural languages has seen a great deal of research devoted to it in past decades. The reason is that the topic has served as a kind of battleground for rival philosophical standpoints regarding the nature of human language and cognition.
+\end_layout
+
+\begin_layout Abstract
+
+In this work, we explore the use of similarity-maximization signaling games to model the evolution of color categories. The model combines innate constraints in human color perception with cultural evolution driven by the need for communicative success. To put the model to a concrete test, we compare the outcome of our simulations directly to real-world basic color term usage data collected in the World Color Survey.
+\end_layout
+
+\begin_layout Abstract
+
+Although we do not find in our simulation results the same strong universal patterns that have been observed in natural languages, the level of agreement between our simulation results and real-world languages indicate that the model is on the right track to provide a good account of how basic color term usage can develop within a community. 
+\end_layout
+
+\begin_layout Section
+
+The World Color Survey and the facts to be explained
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:WCS-facts"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Berlin and Kay
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Berlin69"
+
+\end_inset
+
+ pioneered a long tradition of research into color term systems of world's languages. This broad typological study pointed out that there clearly are universal tendencies concerning repertoires of basic color terms in particular languages. The essential claim for our purposes is an evolutionary one: there is a cross-linguistically universal order in which color vocabularies are enriched by new terms. The order of emergence is captured by the following implicational hierarchy of universals: [white, black] 
+\begin_inset Formula $<$
+\end_inset
+
+ [red] 
+\begin_inset Formula $<$
+\end_inset
+
+ [green, yellow] 
+\begin_inset Formula $<$
+\end_inset
+
+ [blue] 
+\begin_inset Formula $<$
+\end_inset
+
+ [brown] 
+\begin_inset Formula $<$
+\end_inset
+
+ [purple, pink, orange, gray]
+\end_layout
+
+\begin_layout Standard
+
+This hierarchy expresses a complex constraint which was claimed to apply to all existing natural languages. It should be read as follows: if a language has a well-established term for red (that is, a term covering the point of the color space which is the prototypical denotation of the English 
+\begin_inset Quotes eld
+\end_inset
+
+red
+\begin_inset Quotes erd
+\end_inset
+
+), it also has basic terms for white and for black, but not necessarily 
+\shape italic
+vice versa
+\shape default
+. Similarly, if it has one for green or for yellow, it also has one for red, and so on. According to this picture, color term systems are far from being relativistically arbitrary: whatever number of terms they contain, these terms can carve the color space only in certain ways. For example, in a language with three color terms, these are bound to cover, respectively, red, black, and white. The English terms are in fact misleading, since each language is supposed to fully partition the color space. In the last case, the term for red is likely to cover violet or orange as well and the other two terms would rather correspond to 
+\begin_inset Quotes eld
+\end_inset
+
+dark
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+light
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+In order to examine the main theses of the founding study, the World Color Survey (WCS)
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "WCS"
+
+\end_inset
+
+ was conducted in the subsequent decades. It substantially broadened the empirical base and improved the methodology of the previous work, performing field research for 110 unwritten languages (listed by Regier, Kay and Cook
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg05"
+
+\end_inset
+
+) with a negligible level of genetic interrelatedness, with 24 informants per language on average (cf.
+\begin_inset space \space{}
+
+\end_inset
+
+Kay and Cook
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "KayEnc"
+
+\end_inset
+
+ for methodology). The employed color system was one of 330 Munsell chips, 320 of them in the Lenneberg and Roberts array of 40 hue columns and 8 levels of lightness, at maximum saturation, plus an achromatic column of 10 chips from white to black.
+\end_layout
+
+\begin_layout Standard
+
+The results of the WCS concerning the universality of color terms emergence are described by Kay and Maffi
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+. In their work, the empirically documented color term systems are classified into 9 types spread over 5 stages with respect to how six focal points of the color space, corresponding to prototypical denotations of English 
+\begin_inset Quotes eld
+\end_inset
+
+white
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset space ~
+
+\end_inset
+
+(W), 
+\begin_inset Quotes eld
+\end_inset
+
+red
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset space ~
+
+\end_inset
+
+(R), 
+\begin_inset Quotes eld
+\end_inset
+
+yellow
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset space ~
+
+\end_inset
+
+(Y), 
+\begin_inset Quotes eld
+\end_inset
+
+green
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset space ~
+
+\end_inset
+
+(G), 
+\begin_inset Quotes eld
+\end_inset
+
+blue
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset space ~
+
+\end_inset
+
+(Bu), 
+\begin_inset Quotes eld
+\end_inset
+
+black
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset space ~
+
+\end_inset
+
+(Bk), are grouped by the vocabulary of each particular language
+\begin_inset Foot
+status collapsed
+
+
+\begin_layout Standard
+
+Some formulations by Kay and Maffi
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+ are misleading, but Kay et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay97"
+
+\end_inset
+
+ make it clear that what is considered are only partitions of the six focal points, regardless of possible color terms that do not pick any of them. So, e.g., a term covering only purple is not considered 
+\begin_inset Quotes eld
+\end_inset
+
+basic
+\begin_inset Quotes erd
+\end_inset
+
+ in this context; this follows from the assumption of psychophysiological centrality of the six considered colors. Consequently, a language with more than 4 color terms still belongs to Stage III, if these terms split the 6 focal points into just 4 groups.
+\end_layout
+
+\end_inset
+
+. For instance, in Stage II (languages with 3 basic color terms) there is only one observed type, [W; R+Y; Bk+G+Bu]
+\begin_inset Foot
+status collapsed
+
+
+\begin_layout Standard
+
+This notation indicates that the language has one color term that encompasses the prototypical denotation of 
+\begin_inset Quotes eld
+\end_inset
+
+white
+\begin_inset Quotes erd
+\end_inset
+
+ in English, another that encompasses 
+\begin_inset Quotes eld
+\end_inset
+
+red
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+yellow
+\begin_inset Quotes erd
+\end_inset
+
+, and another that encompasses 
+\begin_inset Quotes eld
+\end_inset
+
+black
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+green
+\begin_inset Quotes erd
+\end_inset
+
+, and 
+\begin_inset Quotes eld
+\end_inset
+
+blue
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+; in Stage III (4 basic color terms) there are the types [W; R; Y; Bk+G+Bu], [W, R+Y, G+Bu, Bk] and [W, R, Y+G+Bu; Bk]. The authors note that there are five possible evolutionary trajectories between stages I to V, assuming that any evolutionary step consists in splitting the denotation (the covered focal points) of one term of the previous system in two. The trajectory [W+R+Y; Bk+G+Bu] 
+\begin_inset Formula $>$
+\end_inset
+
+ [W, R+Y, Bk+G+Bu] 
+\begin_inset Formula $>$
+\end_inset
+
+ [W, R+Y, G+Bu, Bk] 
+\begin_inset Formula $>$
+\end_inset
+
+ [W; R; Y; G+Bu; Bk] 
+\begin_inset Formula $>$
+\end_inset
+
+ [W; R; Y; G; Bu; Bk] is the most represented one in the WCS, capturing 91 of the 110 languages.
+\end_layout
+
+\begin_layout Standard
+
+The way the empirical results are presented requires some discussion. The talk of evolutionary paths as instantiated by the languages is slightly misleading: what was really observed was in each case a snapshot of a color term system belonging to one of the 9 types, or to a transition between two of them. These observed transitions are the maximum of diachrony captured in the WCS; apart from this we cannot infer anything about how a particular observed color vocabulary actually came about. This having been clarified, the formulation in terms of these emergence trajectories and the representation of the particular types seems more appropriate than the original strong formulation in terms of implicational hierarchy. First, it draws attention to the almost universal
+\begin_inset Foot
+status collapsed
+
+
+\begin_layout Standard
+
+Rare exceptions are discussed in section 3 of Kay and Maffi 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ principle of partitioning the color space by the available terms, and consequently to the fact that if a color vocabulary is enriched with an additional term, the denotation of some or all of the already established terms is likely to be modified. Second, the gathered data do not seem univocal enough to formulate an implicational hierarchy as strong as that of Berlin and Kay
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Berlin69"
+
+\end_inset
+
+, and anyway, in order to formulate any such generalization, the data would have to be statistically evaluated with this in mind. Admittedly, an overall quantitative evaluation of the WCS data has been done by Kay and Regier
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay03"
+
+\end_inset
+
+ and Regier, Kay and Cook
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg05"
+
+\end_inset
+
+, and it has shown a clear non-random match among color term systems of world's languages, thus refuting the position of full relativism in this respect. But whether 
+\shape italic
+particular
+\shape default
+ generalizations (implicative or other) are valid is an altogether different question. We conjecture that a consequential part of the original hierarchy would not find a significant support in the data, since in the sample there are relatively little languages spread among the types with 4 or less basic color terms, as opposed to about 80 languages with 5 or 6 basic color terms or in between.
+\end_layout
+
+\begin_layout Standard
+
+In the general lack of statistically conclusive support for individual universal features of human color categorization, we will focus on the two of them that can be most reliably inferred from the absolute numbers reported by Kay and Maffi
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+. One is that vocabularies with 3 basic color terms tend to partition the color space according to the scheme [W; R+Y; Bk+G+Bu], that is, to separate the warm colors while keeping the cool colors together with black. This is the only reported type for Stage II, instantiated by 6 languages. The other universal feature to focus on is the evolutionarily late division of green and blue: [W; R; Y, G+Bu; Bk] is by far the most represented type of systems with 5 basic terms (Stage IV), instantiated by 41 languages. The strong universal tendencies to carve up the color space in the described way when, respectively, three and five basic color terms are present, will be in the following regarded as the strongest, best substantiated empirical facts to be explained.
+\end_layout
+
+\begin_layout Section
+
+Related work
+\end_layout
+
+\begin_layout Standard
+
+The general debate on the nature of cognitive categories is dominated by three competing paradigms, nativism, empiricism and culturalism, the third often presented as a solution to the aged dilemma between the first two (cf. Steels and Belpaeme
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Steels05"
+
+\end_inset
+
+ and their references). The debate on color categorization, specifically, is furthermore structured along the dimension of universality vs.
+\begin_inset space \space{}
+
+\end_inset
+
+relativity, which is arguably a distinct one, despite affinities such as that between nativism and universalism. The WCS has posed this question as straightforwardly empirical and provided data; as a result, recent positions on both the universalist
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay03,Reg05"
+
+\end_inset
+
+ and the relativist
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Rob05"
+
+\end_inset
+
+ side are rather moderate.
+\end_layout
+
+\begin_layout Standard
+
+Granted that there 
+\shape italic
+are
+\shape default
+ universal tendencies in color categorization, explanation of these (and of the remaining relativity) has been approached in several ways. Kay and Maffi
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+ themselves present an updated version of a model that had been continuously developed by the WCS authors, on the (close to) nativist assumption of 6 naturally focal colors. The issue has been also studied within the broadly culturalist framework of the Iterated Learning Model
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Smith03,Dowm07"
+
+\end_inset
+
+. However, here we will only discuss in detail the approaches that directly motivate our own model, in which the emergence of categories is conceived in terms of cultural interaction on the basis of innate characteristics of human perception. In a nutshell, these are works by Baronchelli et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Baron10"
+
+\end_inset
+
+ and by Loreto et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lor12"
+
+\end_inset
+
+, focusing on the impact of perceptual constraints on routinized cultural interaction; the more recent work of the WCS authors
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg07"
+
+\end_inset
+
+ investigating partitions of the perceptual space in terms of optimality; and Jäger and van Rooij's
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Rooij07"
+
+\end_inset
+
+ proposal to treat the issue in game-theoretical terms.
+\end_layout
+
+\begin_layout Standard
+
+The first two of our motivating approaches jointly assume that universality of categorization might be explainable in terms of specific characteristics of human visual perception. We first discuss the work by Baronchelli et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Baron10"
+
+\end_inset
+
+ and Loreto et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lor12"
+
+\end_inset
+
+, who attempt to derive the universals from a particular formulation of the dependence of perception on the physical character of the input. We then outline the explanatory strategy of Regier, Kay and Khetarpal
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg07"
+
+\end_inset
+
+, which appears to be a more general, though in a sense less elaborated, version of the former.
+\end_layout
+
+\begin_layout Subsection
+
+Just Noticeable Difference
+\end_layout
+
+\begin_layout Standard
+
+Baronchelli et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Baron10"
+
+\end_inset
+
+, as well as Loreto et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lor12"
+
+\end_inset
+
+, appeal in explanation to a simple characteristic of human visual perception, called Just Noticeable Difference (JND). The human JND is a psychophysiologically determined function which for any given wavelength from the extent of the visible spectrum gives the minimal difference in wavelength of two hues that are distinguishable by the human eye in that particular region of the spectrum. This function is implemented as a constraint on cultural interaction of artificial agents, conceived roughly along the lines of Steels and Belpaeme's 
+\begin_inset Quotes eld
+\end_inset
+
+culturalist model
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Steels05"
+
+\end_inset
+
+. In this setting, color term vocabularies and categorical systems of individual agents in a population are made to co-evolve through their repetitive participation in standardized linguistic interaction over empirical input (
+\begin_inset Quotes eld
+\end_inset
+
+the Category Game
+\begin_inset Quotes erd
+\end_inset
+
+). Similarity between the emergent systems and those observed empirically is then supposed to vindicate the explanatory role of the human JND.
+\end_layout
+
+\begin_layout Standard
+
+Despite general formulations (
+\begin_inset Quotes eld
+\end_inset
+
+excellent quantitative agreement
+\begin_inset Quotes erd
+\end_inset
+
+ with the WCS data), Baronchelli et al.
+\begin_inset space \space{}
+
+\end_inset
+
+are successful only in a specific sense. Their simulation does not demonstrate for particular universal features of human color categorization how these might have been arrived at. It shows only that categorical systems developed via cultural interaction constrained by the human JND are less dispersed across populations than when a flat, non-human JND is used. The only quantitative agreement, then, is between the ratio of the two respective values of dispersion, and the dispersion ratio of the actually observed categorical systems of the WCS, compared to a specific randomization of these (as done by Kay and Regier
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay03"
+
+\end_inset
+
+). The agreement of these two ratios on approximately 1.14 is remarkable, but hard to interpret in isolation. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%both these values are construed in such a complicated fashion that proper interpretation of the match can hardly be straightforward. RO: I insist upon this, though it may not sound as a correct argument. The thing is that evolution in silica, according to a specific dynamic, is something quite different and trasparent in comparison with the overall evolution of world's languages with the immense number of participating factors (including genetic relations, language contact, wars and whatever). While in some respects the artificial dynamic may be almost reasonable model for the latter, I'm pretty sure that from an out-of-the-blue coincidence of two similarly constructed numbers describing outcomes of these two processes absolutely nothing can be inferred.
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Loreto et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lor12"
+
+\end_inset
+
+ come somewhat closer to explanation of particular universals of color categorization. The human JND as a constraint on routine language interaction over empirical input is sufficient for them to derive a hierarchy of color terms according to the time it takes for color terms in various regions of the visible spectrum to be agreed upon within the population. The claim about 
+\begin_inset Quotes erd
+\end_inset
+
+excellent quantitative agreement with the empirical observations of the WCS
+\begin_inset Quotes erd
+\end_inset
+
+ is not further substantiated in the paper. But the authors rightly point out that their hierarchy, [red, (magenta)-red] 
+\begin_inset Formula $<$
+\end_inset
+
+ [violet] 
+\begin_inset Formula $<$
+\end_inset
+
+ [green/yellow] 
+\begin_inset Formula $<$
+\end_inset
+
+ [blue] 
+\begin_inset Formula $<$
+\end_inset
+
+ [orange] 
+\begin_inset Formula $<$
+\end_inset
+
+ [cyan], is similar to the implicational hierarchy of Berlin and Kay 
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Berlin69"
+
+\end_inset
+
+. Let us discuss the relevance of this finding.
+\end_layout
+
+\begin_layout Standard
+
+First, there seems to be a methodological problem with choice of color terms and their matching to regions of the spectrum. This should, arguably, have been done either by selecting a set of cross-linguistically basic colors and locating them in the spectrum, or by selecting important points or sections of the JND function and reading off the respective colors; but an opaque combination of both seems to have taken place. In the first case we would expect both green and yellow in the selection, instead of green/yellow, and we might challenge the inclusion of cyan and (magenta)-red. In the second case, while most of the selected points reflect peaks and valleys of the function, (magenta)-red does not, violet and red are disputable, and there is an unreflected valley between violet and blue. Some of this could be actually resolved in favor of the parallel between the achieved hierarchy and Berlin and Kay's hierarchy; first of all, there are reasons to pick only red for the experiment, instead of red, (magenta)-red and violet. But there remains the problem that green/yellow in the achieved hierarchy is a single transitional color, while in Berlin and Kay's hierarchy green and yellow are two distinct colors occupying the same position.
+\end_layout
+
+\begin_layout Standard
+
+Moreover, let us remember that the work by Berlin and Kay
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Berlin69"
+
+\end_inset
+
+ is a dated reference and there is little point in evaluating explanatory proposals concerning universals of color categorization against the hierarchy stated there, in presence of the WCS data, the superiority of which is both empirical and methodological. Our discussion in Section
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:WCS-facts"
+
+\end_inset
+
+ indicate that the mismatch between the actual findings by Loreto et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lor12"
+
+\end_inset
+
+ and the cross-linguistic reality would have been magnified by an up-to-date evaluation, rather than attenuated. While we believe that the features of human perception that are captured by the JND function should play an important explanatory role regarding linguistic universals, we believe a more up-to-date investigation is still necessary.
+\end_layout
+
+\begin_layout Subsection
+
+The CIELAB space
+\end_layout
+
+\begin_layout Standard
+
+The previous approach appeals to a particular feature of human perception (the resolution power in different frequencies of visible light). The explanatory strategy adopted by Regier, Kay and Khetarpal
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg07"
+
+\end_inset
+
+, with reference to Jameson and D'Andrade
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Jam97"
+
+\end_inset
+
+, is a more general version of that. Instead of carving up a physically defined space (one-dimensional in the previous case), they consider partitions of the psychologically relevant, 3D color space CIELAB. This color space is designed so that standard Euclidean distance of two hues corresponds to their psychological dissimilarity. By using this color space, the constraint on human color perception embodied by the JND is encompassed rather than discarded as a source of explanation, for what it expresses has to be involved also in construction of any psychologically relevant space. When the Munsell color palette used in the WCS is projected into the CIELAB space, its chips mark the surface of an irregular sphere. What is then discussed are partitions of the set of color points thus arranged. The authors convincingly show a strong preference of the WCS languages for efficient partitions, efficient in terms of maximizing the compactness of their color categories in the CIELAB space. What this means is that the closer two chips are in the perceptual space, the more likely they will be lumped under the same color term.
+\end_layout
+
+\begin_layout Standard
+
+This is clearly an important result, pointing to optimality as an essential factor of color categorization. However, this line can be drawn further. Given the specific way of evaluation (each language's actual partition vs.
+\begin_inset space \space{}
+
+\end_inset
+
+its various rotations around the sphere), the results cannot directly account for any particular linguistic universal in question. For instance, we do not see whether the most efficient ways of partitioning the figure into 5 regions involve keeping blue and green together. Another issue is that optimality or efficiency is a static feature of a categorical system (of an individual speaker or of a language 
+\shape italic
+in abstracto
+\shape default
+), without it being clear how it might have come about. In our approach we adopt the idea of the overall character of human visual perception, reflected in the CIELAB color space, as the likely source of universals of color categorization. For sake of comparability with the WCS data we also work with the projected Munsell palette. However, the optimization strategy used by Regier et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg07"
+
+\end_inset
+
+ to calculate partitions of the color space has no realistic underlying motivation. Therefore we are interested in investigating an evolutionary, agent-based dynamic of cultural interaction, as in the game-theoretic formulation proposed by Jäger and van Rooij
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Rooij07"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+
+Similarity-maximization games
+\end_layout
+
+\begin_layout Standard
+
+Jäger and van Rooij
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Rooij07"
+
+\end_inset
+
+ construe the problem as a similarity-maximization signaling game. Nature picks a point from the color space as the meaning to be conveyed; the sender sends one term from a finite set to signal the chosen meaning to the receiver; the receiver interprets the received signal by choosing a point from the color space. The payoff this signaling action brings to both the sender and the receiver is a monotonically decreasing function of the distance in the color space between the receiver's interpretation and the speaker's intended meaning. In general, the sender strategy is a function from the set of points of the color space to (a probabilistic distribution over) the given set of terms, and the receiver strategy is a function from the set of terms to (a probabilistic distribution over) the set of points of the color space. If we let the game be played repetitively and relate payoffs from each particular game to the 
+\begin_inset Quotes erd
+\end_inset
+
+fitness
+\begin_inset Quotes erd
+\end_inset
+
+ of the sender and the receiver strategy employed in that game, or the probability that they will be employed in the next run, we get an evolutionary process with a specific dynamic. This process can be, in principle, viewed as a model of evolution of color categories in a community. How various parameters of such a model are to be set up is, of course, subject to discussion.
+\end_layout
+
+\begin_layout Standard
+
+We chose to base our evolutionary model in similarity-maximization signaling games, rather than in the Category Game of Steels and Belpaeme
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Steels05"
+
+\end_inset
+
+, adopted by Baronchelli et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Baron10"
+
+\end_inset
+
+ and Loreto et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Lor12"
+
+\end_inset
+
+. In the former setting, categories are inherently linguistic and can be unproblematically called 
+\begin_inset Quotes erd
+\end_inset
+
+concepts
+\begin_inset Quotes erd
+\end_inset
+
+ as well. The latter approach, on the other hand, makes the conceptual distinction between perceptual and linguistic categories. Each agent, based on empirical input, individually divides a continuous perceptual space into regions (perceptual categories) within which she cannot further distinguish. A linguistic category then emerges through subsuming of adjacent perceptual categories under a single term. As perceptual categorization independent of language seems to be a problematic notion to us, we prefer the simpler formulation in terms of signaling games. Admittedly, we consider only the 330 Munsell chips as the color space, instead of the continuous space. This choice is motivated by simplicity, especially for allowing a more direct evaluation against the WCS data, but it can be seen as a preliminary perceptual categorization of the continuous space. However, a difference is that in our case the perceptual space is not carved up arbitrarily by individual agents, but uniformly and in roughly homogeneous way with respect to human resolution abilities.
+\end_layout
+
+\begin_layout Section
+
+Methodology
+\end_layout
+
+\begin_layout Standard
+
+As described above, We model the evolution of color terms as a similarity-maximization signaling game, in the spirit of Jäger and van Rooij
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Rooij07"
+
+\end_inset
+
+. We make, however, a number of changes to better fit the problem at hand. Quantitative evaluation is performed against the WCS data by matching simulation results with actual languages and calculating the quality of the match.
+\end_layout
+
+\begin_layout Subsection
+
+Simulation setup
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:simulation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+First of all, we use Munsell chips as individual percepts and define their distance in terms of their coordinates in CIELAB color space, as is done by Regier et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg07"
+
+\end_inset
+
+. The perceptual space to be used in the game consists therefore of 330 points which can be indexed by hue (levels from 0 to 40) and value (10 levels for the achromatic chips, 8 for the others) or by coordinates in CIELAB space 
+\begin_inset Formula $L$
+\end_inset
+
+, 
+\begin_inset Formula $a$
+\end_inset
+
+, 
+\begin_inset Formula $b$
+\end_inset
+
+. We used the mapping from hue and value to CIELAB space provided with the WCS data
+\begin_inset Foot
+status collapsed
+
+
+\begin_layout Standard
+
+Obtained from 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www1.icsi.berkeley.edu/wcs/data/cnum-maps/cnum-vhcm-lab-new.txt"
+
+\end_inset
+
+(accessed 17/01/2013).
+\end_layout
+
+\end_inset
+
+. Given two points and their CIELAB coordinates 
+\begin_inset Formula $x_{1}=\left\langle L_{1},a_{1},b_{1}\right\rangle $
+\end_inset
+
+ and 
+\begin_inset Formula $x_{2}=\left\langle L_{2},a_{2},b_{2}\right\rangle $
+\end_inset
+
+, their similarity is given by: 
+\begin_inset Formula \[
+sim\left(x_{1},x_{2}\right)=e^{-c\times\left(dist\left(x_{1},x_{2}\right)\right)^{2}}
+\]
+\end_inset
+
+ where 
+\begin_inset Formula $dist\left(x_{1},x_{2}\right)$
+\end_inset
+
+ is the euclidean distance in CIELAB space: 
+\begin_inset Formula \[
+dist\left(x_{1},x_{2}\right)=\sqrt{\left(L_{1}-L_{2}\right)^{2}+\left(a_{1}-a_{2}\right)^{2}+\left(b_{1}-b_{2}\right)^{2}}
+\]
+\end_inset
+
+ To be in line with Regier et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg07"
+
+\end_inset
+
+ we use 
+\begin_inset Formula $c=0.001$
+\end_inset
+
+ for all simulations.
+\end_layout
+
+\begin_layout Standard
+
+The similarity-maximization game consists of the tuple 
+\begin_inset Formula $\left\langle T,\Pr,M,U\right\rangle $
+\end_inset
+
+, where 
+\begin_inset Formula $T$
+\end_inset
+
+ is the perceptual space described above, 
+\begin_inset Formula $\Pr\in\Delta\left(T\right)$
+\end_inset
+
+ is a probability distribution over 
+\begin_inset Formula $T$
+\end_inset
+
+, 
+\begin_inset Formula $M$
+\end_inset
+
+ is the set of messages available, and 
+\begin_inset Formula $U\in T\times T\rightarrow\mathbb{R}$
+\end_inset
+
+ is the utility function for both speaker and hearer. We define only one utility function for both speaker and hearer, thus we assume perfectly cooperative interests. Furthermore, we assume that talk is cheap and utility is directly proportional to similarity, 
+\emph on
+i.e.
+\emph default
+
+\begin_inset space \space{}
+
+\end_inset
+
+
+\begin_inset Formula $U\left(x_{1},x_{2}\right)=sim\left(x_{1},x_{2}\right)$
+\end_inset
+
+. We used a uniform 
+\begin_inset Formula $\Pr$
+\end_inset
+
+ in all simulations, but we include it in the formulation of the model to not deviate from Jäger and van Rooij
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Rooij07"
+
+\end_inset
+
+ and because we will come back to it in Section
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:discussion"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+Regarding game dynamics, we used the replicator equation over mixed strategies. A sender strategy 
+\begin_inset Formula $\sigma\in T\rightarrow\Delta\left(M\right)$
+\end_inset
+
+ associates to each point in the perceptual space a probability distribution over the set of messages. A receiver strategy 
+\begin_inset Formula $\rho\in M\rightarrow\Delta\left(T\right)$
+\end_inset
+
+ associates to each message a probability distribution over all points in perceptual space. Probability values should be interpreted as percentages of a hypothetical population. Therefore, if 
+\begin_inset Formula $\sigma\left(x_{1},m_{1}\right)=0.7$
+\end_inset
+
+, this should be interpreted as 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $70\%$
+\end_inset
+
+ of the population uses message 
+\begin_inset Formula $m_{1}$
+\end_inset
+
+ when observing point 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+. The dynamics update these strategies according to their expected utility. The state of each strategy at time instant 
+\begin_inset Formula $t+1$
+\end_inset
+
+ is defined as follows: 
+\begin_inset Formula \[
+\sigma_{t+1}\left(x,m\right)=\sigma_{t}\left(x,m\right)\times\frac{\textnormal{EU}_{\sigma_{t}}\left(m\mid x,\rho_{t}\right)\times\left|M\right|}{\underset{m^{\prime}\in M}{\sum}\textnormal{EU}_{\sigma_{t}}\left(m^{\prime}\mid x,\rho_{t}\right)}
+\]
+\end_inset
+
+ 
+\begin_inset Formula \[
+\rho_{t+1}\left(m,x\right)=\rho_{t}\left(m,x\right)\times\frac{\textnormal{EU}_{\rho_{t}}\left(x\mid m,\sigma_{t}\right)\times\left|T\right|}{\underset{x^{\prime}\in T}{\sum}\textnormal{EU}_{\rho_{t}}\left(x^{\prime}\mid m,\sigma_{t}\right)}
+\]
+\end_inset
+
+ where expected utilities are defined as: 
+\begin_inset Formula \[
+\textnormal{EU}_{\sigma}\left(m\mid x,\rho\right)=\underset{x^{\prime}\in T}{\sum}\rho\left(x^{\prime}\mid m\right)\times U\left(x,x^{\prime}\right)
+\]
+\end_inset
+
+ 
+\begin_inset Formula \[
+\textnormal{EU}_{\rho}\left(x\mid m,\sigma\right)=\underset{x^{\prime}\in T}{\sum}\Pr\left(x^{\prime}\right)\times\sigma\left(m\mid x^{\prime}\right)\times U\left(x^{\prime},x\right)
+\]
+\end_inset
+
+ Starting conditions 
+\begin_inset Formula $\sigma_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho_{0}$
+\end_inset
+
+ are initialized with random values for every simulation. All simulations were ran until a convergence criterion was met. The criterion was that the total absolute change in both sender and receiver strategy was under 
+\begin_inset Formula $1\%$
+\end_inset
+
+, 
+\emph on
+i.e.
+\emph default
+: 
+\begin_inset Formula \begin{eqnarray*}
+ & \underset{x\in T}{\sum}\underset{m\in M}{\sum}\left|\sigma_{t+1}\left(x,m\right)-\sigma_{t}\left(x,m\right)\right|<0.01\\
+ & \wedge\\
+ & \underset{m\in M}{\sum}\underset{x\in T}{\sum}\left|\rho_{t+1}\left(m,x\right)-\rho_{t}\left(m,x\right)\right|<0.01
+\end{eqnarray*}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+Quantitative evaluation
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:quantitative-evaluation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Following the approach by Regier et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg07"
+
+\end_inset
+
+, we calculated a mode map per language in the WCS data. Each language was then classified regarding the number of main color terms. Since Regier et al.
+\begin_inset space \space{}
+
+\end_inset
+
+did not provide a clear criterion for what they consider a main color term, we employed our own heuristic: we counted for each language how many color terms cover at least 
+\begin_inset Formula $5\%$
+\end_inset
+
+ of the space, 
+\emph on
+i.e.
+\emph default
+
+\begin_inset space \space{}
+
+\end_inset
+
+at least 
+\begin_inset Formula $16$
+\end_inset
+
+ Munsell chips.
+\end_layout
+
+\begin_layout Standard
+
+We can then try to match two 
+\begin_inset Formula $n$
+\end_inset
+
+-term languages (or simulation results) 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ by mapping terms in one language to terms in the other. The procedure was to establish the mapping based on the amount of overlap between terms as follows: 
+\end_layout
+
+\begin_layout Enumerate
+
+Calculate, for each pair of terms 
+\begin_inset Formula $t_{1}\in L_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{2}\in L_{2}$
+\end_inset
+
+, the number of chips they have in common; 
+\end_layout
+
+\begin_layout Enumerate
+
+Establish a one-to-one mapping starting with the two terms that have the highest overlap until no more terms are left or no overlap exists between the remaining terms. 
+\end_layout
+
+\begin_layout Standard
+
+The quality of each pairing can be calculated in terms of precision and recall, 
+\emph on
+i.e.
+\emph default
+
+\begin_inset space \space{}
+
+\end_inset
+
+what percentage of 
+\begin_inset Formula $t_{1}$
+\end_inset
+
+ chips are also 
+\begin_inset Formula $t_{2}$
+\end_inset
+
+ and what percentage of 
+\begin_inset Formula $t_{2}$
+\end_inset
+
+ chips are also 
+\begin_inset Formula $t_{1}$
+\end_inset
+
+. The overall quality of the mapping can be calculated in terms of accuracy, 
+\emph on
+i.e.
+\emph default
+
+\begin_inset space \space{}
+
+\end_inset
+
+what percentage of total overlap is there with the established mapping.
+\end_layout
+
+\begin_layout Standard
+
+The accuracy numbers can then be summarized to give an impression of the overall match between our languages (or simulation results) and the languages in the WCS. As reference points for comparison we calculated these numbers not only for our simulation results but for three other scenarios, namely: 
+\end_layout
+
+\begin_layout Enumerate
+
+Matching each WCS language against its peers (in number of main color terms). This establishes a pragmatic upper bound to how well we can expect a simulation to be able to perform; 
+\end_layout
+
+\begin_layout Enumerate
+
+Simulation results performed with a neutral similarity metric. Since the Munsell chips are distributed in CIELAB space as an irregular sphere, for these results we laid them out as a regular sphere. For that we used as spherical coordinates, value to indicate the elevation angle, hue to indicate the azimuth angle, and a fixed radius estimated from the irregular sphere. Distance was then computed by converting these coordinates to Cartesian coordinates and calculating the Euclidean distance; 
+\end_layout
+
+\begin_layout Enumerate
+
+Random assignment of color terms to chips (basically the initial conditions of the simulation). This establishes a lower bound for comparison. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%note on why the results are better than 1/n?
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+Results
+\end_layout
+
+\begin_layout Standard
+
+As described in Section
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:quantitative-evaluation"
+
+\end_inset
+
+, all languages in the WCS were classified in terms of their number of main color terms. The following table summarizes the results:
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\begin_inset Tabular 
+<lyxtabular version="3" rows="2" columns="7">
+<features tabularvalignment="middle">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<row>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+Number of main color terms 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+3 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+7 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+8
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+Number of languages 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+12 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+31 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+40 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+14 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+7 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+Based on these results, we ran 
+\begin_inset Formula $10$
+\end_inset
+
+ simulations for each of these categories.
+\end_layout
+
+\begin_layout Subsection
+
+Specific evaluation of the evolutionary predictions
+\end_layout
+
+\begin_layout Standard
+
+To evaluate the model against the two particular facts concerning the evolutionary order of color terms emphasized in Section
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:WCS-facts"
+
+\end_inset
+
+, we classified the resulting categorical systems of 
+\begin_inset Formula $60$
+\end_inset
+
+ simulations into types spread over stages, as done by Kay and Maffi
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+. Analogically to their work, the classification was based on the way in which the resulting systems partitioned the 
+\begin_inset Formula $6$
+\end_inset
+
+ assumed focal color points. After Kay
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay05"
+
+\end_inset
+
+, we took the focal points to be represented by the following chips: A0 for white, C9 for yellow, G1 for red, F17 for green, F29 for blue, and J0 for black. On the whole, there is little resemblance between our outcome and the empirical classification of Kay and Maffi
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+. Most of our Stage II is covered by the types [W+Y; R+Bu; G+Bk] and [W+Y; G+Bu; R+Bk], whereas the only type attested in the WCS, [W; R+Y; Bk+G+Bu], is not represented in our Stage II. In our stage IV, the most represented types are [W; Y+Bk; G; Bu; R], [W; Y; G; R+Bu; Bk] and [W; Y; R; G+Bk; Bu]. The type [W; R; Y, G+Bu; Bk], which is dominant among the WCS languages of Stage IV, is lacking in our results.
+\end_layout
+
+\begin_layout Standard
+
+It is nonetheless important to note that the reported numbers crucially depend on the considered position of the focal points, and that a slight change in this respect can substantially modify the resulting picture. The position of focal blue is a most striking example. In our classification there are 
+\begin_inset Formula $19$
+\end_inset
+
+ systems in which focal blue and red are subsumed under a common term. However, if we regarded the chip F28 instead of the neighbouring F29 as the focal blue, 
+\begin_inset Formula $17$
+\end_inset
+
+ of them would have to be reclassified, almost exclusively in favour of types in which focal blue is lumped together with focal green, or with focal green and focal black. That would bring our results a little bit closer to the findings of Kay and Maffi
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+. Since we do not see independent theoretical motivation for moving the focal points in this or another particular way, we do not follow this line further. It is worth attention, though, especially as it is not clear whether Kay and Maffi
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+ based their classification on a set of focal points identical to ours. Table
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:stages"
+
+\end_inset
+
+ shows the representation of types in stages, assuming the basic set of focal points, and after the minimal change in focal blue.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+\align center
+
+
+\begin_inset Tabular 
+<lyxtabular version="3" rows="25" columns="4">
+<features tabularvalignment="middle">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+Type 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+Basic 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+Focal blue 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ F28 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W+Y; G+Bk; Bu+R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+5
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+Stage II
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W+Y; G+Bu; R+Bk 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W+Y; R; G+Bu+Bk 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W+Bu; Y+R+Bk; G 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y+R+Bk; G+Bu 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y; G+Bk; Bu+R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+10
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+Stage III
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W+Y; G; Bk; Bu+R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+3 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Bk+Y; G; Bu+R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Bk+Y; G+Bu; R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W+Y; G+Bk; R; Bu 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W+Y; G; Bu; Bk+R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y+R; G+Bu; Bk 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W+Y; R; G+Bu; Bk 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y; R; G+Bk+Bu 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y; R+Bk; G+Bu 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y+Bk; G; Bu; R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+3 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+8
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+Stage IV
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y; G; Bk; Bu+R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y; G+Bk; Bu; R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y; G; Bk+Bu; R 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+3 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; R+Y; G; Bk; Bu 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W+Y, R; G; Bu; Bk 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+2 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y; R+Bk; G; Bu 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y; R; G+Bu; Bk 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+- 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+W; Y; R; G; Bk; Bu 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+14 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+12 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+1
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+Stage V
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Caption
+
+\begin_layout Standard
+
+60 simulation results classified into types of partitioning the 6 focal points, with the basic set of points and with focal blue changed from F29 to F28.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:stages"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+In the following, we evaluate our model as to its general predictive power with respect to the documented languages of the WCS. In this part of evaluation, all 330 chips are treated equally and the question of focal colors plays no role.
+\end_layout
+
+\begin_layout Subsection
+
+General quantitative evaluation
+\end_layout
+
+\begin_layout Standard
+
+We established mappings between each of the 
+\begin_inset Formula $60$
+\end_inset
+
+ outcomes of the simulations and the languages in the WCS in the respective categories. For example, for 
+\begin_inset Formula $4$
+\end_inset
+
+ terms we have 
+\begin_inset Formula $10$
+\end_inset
+
+ simulations matched against 
+\begin_inset Formula $12$
+\end_inset
+
+ languages, thus 
+\begin_inset Formula $120$
+\end_inset
+
+ accuracy values. Table
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:overall-statistics"
+
+\end_inset
+
+ contains the overall statistics for each category (
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of terms) in each scenario. We illustrate these numbers in Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:plots"
+
+\end_inset
+
+ with the simulations involved in the best and worst matches.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+\align center
+
+
+\begin_inset Tabular 
+<lyxtabular version="3" rows="25" columns="8">
+<features tabularvalignment="middle">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="right" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset Formula $n$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+Min. 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+1st Qu. 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+Median 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+Mean 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+3rd Qu. 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+Max. 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+3 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.779 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.833 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.870 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.865 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.909 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.930 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{sideways}
+\end_layout
+
+\end_inset
+
+ WCS 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{sideways}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.336 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.545 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.630 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.629 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.712 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.836 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.373 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.603 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.700 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.688 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.776 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.900 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.400 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.606 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.679 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.670 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.739 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.879 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+7 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.379 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.521 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.588 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.600 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.673 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.818 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+8 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.488 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.600 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.715 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.690 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.741 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.888 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+3 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.394 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.468 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.602 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.583 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.692 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.788 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{sideways}
+\end_layout
+
+\end_inset
+
+ simulations 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{sideways}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.324 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.479 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.552 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.547 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.606 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.761 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.388 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.500 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.533 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.542 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.573 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.703 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.364 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.455 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.497 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.501 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.545 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.661 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+7 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.376 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.458 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.486 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.489 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.521 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.630 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+8 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.361 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.447 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.476 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.492 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.548 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.664 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+3 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.421 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.533 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.579 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.573 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.618 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.703 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{sideways}
+\end_layout
+
+\end_inset
+
+ perfect sphere 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{sideways}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.324 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.412 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.458 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.457 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.495 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.591 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.261 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.400 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.452 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.447 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.486 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.600 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.285 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.412 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.442 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.441 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.476 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.573 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+7 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.318 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.418 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.448 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.444 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.473 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.570 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+8 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.327 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.405 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.427 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.425 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.447 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.509 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+3 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.321 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.342 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.348 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.350 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.355 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.379 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multirow
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+*
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{sideways}
+\end_layout
+
+\end_inset
+
+ random 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{sideways}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.224 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.270 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.285 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.282 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.294 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.321 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+5 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.182 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.224 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.233 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.234 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.245 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.270 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+6 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.164 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.203 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.212 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.214 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.224 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.258 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+7 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.155 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.179 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.191 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.190 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.200 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.239 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+8 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.148 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.170 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.179 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.179 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.188 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+0.221 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Caption
+
+\begin_layout Standard
+
+Summary statistics of match accuracy against languages in the WCS.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:overall-statistics"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+
+\begin_layout Standard
+
+
+\begin_inset Graphics 
+	filename 3-2.png
+	width 48text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:best-simulation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Standard
+
+Simulation with one of the best average accuracy values: 0.715. Best match against Kwerba (Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:kwerba"
+
+\end_inset
+
+). Worst match against Nafaanra (Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:nafaanra"
+
+\end_inset
+
+).
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hfill{}
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+
+\begin_layout Standard
+
+
+\begin_inset Graphics 
+	filename 4-2.png
+	width 48col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:worst-simulation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Standard
+
+Simulation with one of the worst average accuracy values: 0.449. Best match against Chácobo (Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:chacobo"
+
+\end_inset
+
+). Worst match against Culina (Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:culina"
+
+\end_inset
+
+).
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+
+\begin_layout Standard
+
+
+\begin_inset Graphics 
+	filename Kwerba.png
+	width 48col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:kwerba"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Standard
+
+Kwerba language. Average within-category accuracy: 0.815. Match accuracy against simulation in Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:best-simulation"
+
+\end_inset
+
+: 0.788.
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hfill{}
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+
+\begin_layout Standard
+
+
+\begin_inset Graphics 
+	filename Chácobo
+	width 48col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:chacobo"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Standard
+
+Chácobo language. Average within-category accuracy: 0.690. Match with simulation in Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:worst-simulation"
+
+\end_inset
+
+: 0.524.
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+
+\begin_layout Standard
+
+
+\begin_inset Graphics 
+	filename Nafaanra.png
+	width 48col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:nafaanra"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Standard
+
+Nafaanra language. Average within-category accuracy: 0.870. Match with simulation in Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:best-simulation"
+
+\end_inset
+
+: 0.658. Match with Kwerba (Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:kwerba"
+
+\end_inset
+
+): 0.779.
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset space \hfill{}
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+
+\begin_layout Standard
+
+
+\begin_inset Graphics 
+	filename Culina.png
+	width 48col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:culina"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Standard
+
+Culina language. Average within-category accuracy: 0.595. Match with simulation in Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:worst-simulation"
+
+\end_inset
+
+: 0.324. Match with Chácobo (Figure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:chacobo"
+
+\end_inset
+
+): 0.564.
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset Caption
+
+\begin_layout Standard
+
+Simulation results and matches with WCS languages.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:plots"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+What the numbers indicate is that the simulations are approximating the phenomenon, although in a limited way. As expected, the accuracy values obtained by the simulation results are significantly higher than those obtained by random assignment. However, they are also significantly lower than the within-category accuracy values obtained by the languages in the WCS, albeit closer to this scenario than to the random one. The comparison with the perfect sphere scenario shows how important the topology of the color space is: the accuracy values for this scenario are quite close to the ones obtained by the simulation results. However, they are also consistently lower, which indicates that our simulation setup is capturing some other non-trivial characteristics of the phenomenon.
+\end_layout
+
+\begin_layout Standard
+
+Unfortunately, due to time limitations, we were not able to perform a more in-depth analysis of all the results. This is important future work to identify weaknesses in the model and therefore explore improvements to it. For example, we noticed that the distribution of the accuracy values of the simulations for 
+\begin_inset Formula $n=3$
+\end_inset
+
+ is actually bi-modal: 5 simulations have accuracy values ranging from 
+\begin_inset Formula $0.394$
+\end_inset
+
+ to 
+\begin_inset Formula $0.615$
+\end_inset
+
+, with an average of 
+\begin_inset Formula $0.474$
+\end_inset
+
+, whereas the other 5 have accuracy values ranging from 
+\begin_inset Formula $0.588$
+\end_inset
+
+ to 
+\begin_inset Formula $0.788$
+\end_inset
+
+, with an average of 
+\begin_inset Formula $0.691$
+\end_inset
+
+. This indicates that a large number of populations are getting stuck in some local minimum and thus adding for example mutation and/or invention to the model might give a big boost in overall performance.
+\end_layout
+
+\begin_layout Section
+
+Discussion
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:discussion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Although we were not able to account for particular universals of color categorization in line with Kay and Maffi
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Kay99"
+
+\end_inset
+
+, the overall quantitative evaluation of the model is encouraging, especially if you consider the best-case values achieved. We have shown that a very simple similarity-maximization signaling game based on a realistic color space can already approximate, even if slightly, real-world basic color term usage. Furthermore, our result is in certain sense complementary to that of Regier et al.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Reg07"
+
+\end_inset
+
+. Whereas their work establishes the inclination of the WCS categorical systems to optimality, taking the projection of the Munsell chips into the CIELAB space for granted, our model confirms that there is indeed a degree of realism in choosing just this projection to be partitioned. We would now like to discuss a number of limitations of the model where there is room for improvement by future research.
+\end_layout
+
+\begin_layout Standard
+
+First, we have largely neglected empiricist views on the nature of categories, emphasizing the dependence of these on the character of the empirical input of any individual. We did so in assuming flat probabilistic distribution over the perceptual space of 330 points. Instead, a more realistic distribution could be used which would reflect distribution of colors in natural sceneries. Purely empiricist strategies of deriving color categories, based on clustering of such realistically distributed input, are assessed by Yendrikhovskij
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Yendr01"
+
+\end_inset
+
+ and Steels and Belpaeme
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "Steels05"
+
+\end_inset
+
+. The latter show that realistic distribution helps a population of agents to converge in their categorical repertoires, but is not a sufficiently strong factor to establish a full agreement. In our model, convergence is reached via linguistic interaction anyway, and realistic color distribution might increase the performance.
+\end_layout
+
+\begin_layout Standard
+
+This suggestion, though, embodies a rather crude version of empiricism. It would be even more desirable to integrate in the model ecological significances of various colors found in the environment, which need not correspond to overall representation of these colors in one's visual field. For instance, it seems plausible that red, the color of blood and of many ripe fruits, is a more important color to be linguistically distinguished than, say, purple or turquoise, or even blue of clear sky and green of vegetation. If grounded in independent evidence, rather than mere speculation, this could be represented in our model by a utility function differentiated over the perceptual space.
+\end_layout
+
+\begin_layout Standard
+
+Second, our model is clearly unrealistic in that it lets fixed numbers of terms compete in the perceptual space equally from a random start. Instead, we should let terms break into the space already partitioned by previous ones, as is apparently the case in language evolution. This might lead to categorical systems quite different from what we got in our setting. Allowing new signals to be invented is not unusual in signaling games and besides being more realistic it can even help achieving convergence faster and avoiding certain undesirable equilibria
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after "chapter 10"
+key "Skyrms2010"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+Third, for reasons of simplicity we used the set of Munsell chips projected in the CIELAB color space as the perceptual space for the game. However, what would be more realistic would be to use the continuous CIELAB space and only for purposes of evaluation against the WCS map the results back to the set of Munsell chips.
+\end_layout
+
+\begin_layout Standard
+
+Finally, CIELAB is not the most up-to-date color appearance model and has recently been superseded by CIECAM02
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "fairchild2005color"
+
+\end_inset
+
+. We used the CIELAB coordinates since those were conveniently provided with the WCS data, but perhaps using CIECAM02 instead could lead to even better results.
+\end_layout
+
+\begin_layout Section
+
+Conclusion
+\end_layout
+
+\begin_layout Standard
+
+Our contribution is a model which transparently embodies a small amount of explanatory principles, and a method of refined evaluation, which can be repeated for future models of the same phenomenon. We did not fully succeed in obtaining the results we expected, but we got some promising indicators that the model is on the right track. We provided a number of suggestions for improvements and we believe that, with those in place, the model could provide a very realistic account of how certain quasi-universal patterns of basic color term usage can arise.
+\end_layout
+
+\begin_layout Standard
+
+ 
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bibl"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
