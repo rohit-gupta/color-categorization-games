@@ -1,4 +1,5 @@
-from scipy import *
+import numpy as np
+from numpy import random as random
 from Tkinter import *
 from tkSimpleDialog import *
 
@@ -8,111 +9,178 @@ from datetime import datetime
 import sys
 import math
 
-def max_index(l): # returns the index with maximal value
-    # if there are several maxima, one is picked at random
-    m = [i for i in range(len(l)) if l[i]==max(l)]
-    if len(m)==1:
-        return m[0]
-    return m[random.randint(len(m))]
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from reportlab.pdfbase import cidfonts
 
-NHues = 41 # number of hues
-NValues = 10 # number of values
-NMeanings = 330 # values 0 and 9 have only 1 hue (0)
+def read_csv_file(filename, cols, skip_header=True):
+    table = []
+    with open(filename, 'r') as f:
+        reader = csv.reader(f)
+        if skip_header:
+            reader.next()
+        for row in reader:
+            table.append([ float(row[col]) for col in cols ])
+    return(np.array(table))
 
-if len(sys.argv) < 4:
-    print "Usage: python", sys.argv[0], "<number of messages> <maximum number of generations> <output filename>"
-    sys.exit(1)
+def write_csv_file(table, cols, filename, header=None):
+    with open(filename, 'w') as file:
+        writer = csv.writer(file)
+        if header != None:
+            writer.writerow(header)
+        for r in xrange(len(table)):
+            writer.writerow([ table[r, c] for c in cols ])
 
-NForms = int(sys.argv[1])
-NGenerations = int(sys.argv[2])
-output_filename = sys.argv[3]
+def similarity(x1, x2):
+    L1 = x1[0]
+    L2 = x2[0]
+    a1 = x1[1]
+    a2 = x2[1]
+    b1 = x1[2]
+    b2 = x2[2]
+    dist12 = sqrt((L1 - L2) ** 2 + (a1 - a2) ** 2 + (b1 - b2) ** 2)
+    return(exp(-0.001 * (dist12 ** 2)))
 
-# read CIELAB coordinates from file
-CIELABCoord = []
-CIELABFile = 'perceptual-space-with-sphere.csv'
-with open(CIELABFile, 'r') as f:
-    reader = csv.reader(f)
-    reader.next() # skip header
-    for row in reader:
-        # proper CIELAB coordinates
-        CIELABCoord.append((float(row[7]),float(row[8]),float(row[9])))
-        # sphere coordinates
-        #CIELABCoord.append((float(row[15]),float(row[14]),float(row[13])))
+def similarity_matrix(Lab1, Lab2):
+    Sim = np.zeros((len(Lab1), len(Lab2)))
+    for x1 in xrange(len(Lab1)):
+        print x1
+        for x2 in xrange(len(Lab2)):
+            Sim[x1][x2] = similarity(Lab1[x1], Lab2[x2])
+    return(Sim)
 
-Sim = zeros((NMeanings,NMeanings))
-for x1 in range(NMeanings):
-    for x2 in range(NMeanings):
-        coord1 = CIELABCoord[x1]
-        coord2 = CIELABCoord[x2]
-        L1 = coord1[0]
-        L2 = coord2[0]
-        a1 = coord1[1]
-        a2 = coord2[1]
-        b1 = coord1[2]
-        b2 = coord2[2]
-        dist12 = sqrt((L1-L2)**2 + (a1-a2)**2 + (b1-b2)**2)
-        Sim[x1][x2] = exp(-0.001 * (dist12**2))
+def speaker_mode_map(Lab1, Strategy, Lab2=None, Similarity12=None):
+    if Lab2 == None:
+        Lab2 = Lab1
+    NPoints = len(Lab2)
+    ModeMap = np.zeros(NPoints, int)
+    for x in xrange(NPoints):
+        if Similarity12 == None:
+            y = x
+        else:
+            y = np.argmax(Similarity12[x])
+        ModeMap[x] = np.argmax(Strategy[y])
+    return(ModeMap)
 
-# uniform priors
-PMeaning = ones(NMeanings)
+def plot(PerceptualSpace, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=False):
+    plt.clf()
+#    fig = plt.figure()
+    ax1 = plt.subplot(2, 2, 1, projection='3d')
+    ax1.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=PerceptualModeMap)
+    ax2 = plt.subplot(2, 2, 2, projection='3d')
+    ax2.scatter(MunsellPalette[:, 1], MunsellPalette[:, 2], MunsellPalette[:, 0], c=MunsellModeMap)
+    ax2.set_xlim(ax1.get_xlim())
+    ax2.set_ylim(ax1.get_ylim())
+    ax2.set_zlim(ax1.get_zlim())
+#        for m in xrange(NForms):
+#            ax = plt.subplot(3, NForms, NForms + 1 + m, projection='3d')
+#            ax.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=Speakers[:, m])
+#            ax = plt.subplot(3, NForms, 2 * NForms + 1 + m, projection='3d')
+#            ax.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=Hearers[m])
+    tmpModeMap = MunsellModeMap[range(1, len(MunsellModeMap) - 1)]
+    tmpModeMap.shape = (8, 41)
+    ax2 = plt.subplot(2, 1, 2)
+    plt.imshow(tmpModeMap, interpolation='none')
+    plt.show(block=block)
+    plt.pause(0.01)
 
-PMeaning /= sum(PMeaning)
+def run_simulation(PerceptualSpace, NForms, NGenerations, output_filename, Sim=None, Sim2=None):
+    MunsellPalette = read_csv_file('perceptual-space-with-sphere.csv', [7, 8, 9])
+    
+    NMeanings = len(PerceptualSpace)
+    
+    if Sim == None:
+        Sim = similarity_matrix(PerceptualSpace, PerceptualSpace)
 
-Speakers = random.random((NMeanings,NForms))
-Hearers = random.random((NForms,NMeanings))
+    if Sim2 == None:
+        Sim2 = similarity_matrix(MunsellPalette, PerceptualSpace)
 
-for i in range(NMeanings):
-    Speakers[i] /= sum(Speakers[i])
-for i in range(NForms):
-    Hearers[i] /= sum(Hearers[i])
+    # uniform priors
+    PMeaning = np.ones(NMeanings)
+    
+    PMeaning /= np.sum(PMeaning)
+    
+    Speakers = random.random((NMeanings, NForms))
+    Hearers = random.random((NForms, NMeanings))
+    
+    for i in xrange(NMeanings):
+        Speakers[i] /= np.sum(Speakers[i])
+    for i in xrange(NForms):
+        Hearers[i] /= np.sum(Hearers[i])
 
-for g in xrange(NGenerations):
+    for g in xrange(NGenerations):
+    
+        print 'Generation: ', str(g)
+        
+        PerceptualModeMap = speaker_mode_map(PerceptualSpace, Speakers)
+        MunsellModeMap = speaker_mode_map(PerceptualSpace, Speakers, MunsellPalette, Sim2)
+        
+        plot(PerceptualSpace, MunsellPalette, PerceptualModeMap, MunsellModeMap)
+    
+        SpeakersBefore = copy.deepcopy(Speakers)
+        HearersBefore = copy.deepcopy(Hearers)
+    
+        # Calculate Expected Utilities
+        uS = np.zeros((NMeanings, NForms))
+        uH = np.zeros((NForms, NMeanings))
+        for m in xrange(NMeanings):
+            for f in xrange(NForms):
+                uS[m][f] = np.dot(Hearers[f], Sim[m])
+    
+        for f in xrange(NForms):
+            for m in xrange(NMeanings):
+                uH[f][m] = np.dot(PMeaning * Speakers[:, f], Sim[m])
+    
+        # Replicator Dynamics on Behavioral Strategies
+        for t in xrange(NMeanings):
+            for m in xrange(NForms):
+                Speakers[t, m] = Speakers[t, m] * (uS[t, m] / (np.sum(uS[t]) / NForms))
+                Hearers[m, t] = Hearers[m, t] * (uH[m, t] / (np.sum(uH[m]) / NMeanings))
+    
+        # Readjusting, Normalizing
+        for i in xrange(NMeanings):
+            if np.sum(Speakers[i]) == 0: 
+                Speakers[i] += 1
+            Speakers[i] /= np.sum(Speakers[i])
+        for i in xrange(NForms):
+            if np.sum(Hearers[i]) == 0: Hearers[i] += 1
+            Hearers[i] /= np.sum(Hearers[i])
+    
+        if np.sum(abs(Speakers - SpeakersBefore)) < 0.1 and np.sum(abs(Hearers - HearersBefore)) < 0.1:
+            print 'Converged!\a'
+            break
+    
+    plot(PerceptualSpace, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
+    
+    MunsellModeMap = speaker_mode_map(PerceptualSpace, Speakers, MunsellPalette, Sim2)
+    
+    NHues = 41  # number of hues
+    NValues = 10  # number of values
+    
+    with open(output_filename, 'a') as mode_map_file:
+        writer = csv.writer(mode_map_file)
+        time = str(datetime.today())
+        writer.writerow([time, 0, 'A', 't' + str(MunsellModeMap[0])])
+        for r in xrange(NValues - 2):
+            for c in xrange(NHues):
+                writer.writerow([time, c, ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'][r], 't' + str(MunsellModeMap[1 + r * NHues + c])])
+        writer.writerow([time, 0, 'J', 't' + str(MunsellModeMap[329])])
 
-    print 'Generation: ', str(g)
 
-    SpeakersBefore = copy.deepcopy(Speakers)
-    HearersBefore = copy.deepcopy(Hearers)
+if __name__ == "__main__":
+    if len(sys.argv) < 4:
+        print "Usage: python", sys.argv[0], "<number of messages> <maximum number of generations> <output filename>"
+        sys.exit(1)
+    else:
+        NForms = int(sys.argv[1])
+        NGenerations = int(sys.argv[2])
+        output_filename = sys.argv[3]
 
-    # Calculate Expected Utilities
-    uS = zeros((NMeanings,NForms))
-    uH = zeros((NForms,NMeanings))
-    for m in range(NMeanings):
-        for f in range(NForms):
-            uS[m][f] = dot(Hearers[f],Sim[m])
-
-    for f in range(NForms):
-        for m in range(NMeanings):
-            uH[f][m]= dot(PMeaning*Speakers[:,f],Sim[m])
-
-    # Replicator Dynamics on Behavioral Strategies
-    for t in range(NMeanings):
-        for m in range(NForms):
-            Speakers[t,m] = Speakers[t,m] * (uS[t,m] / (sum(uS[t]) / NForms))
-            Hearers[m,t] = Hearers[m,t] * (uH[m,t] / (sum(uH[m]) / NMeanings))
-
-    # Readjusting, Normalizing
-    for i in range(NMeanings):
-        if sum(Speakers[i]) == 0: 
-            Speakers[i] += 1
-        Speakers[i] /= sum(Speakers[i])
-    for i in range(NForms):
-        if sum(Hearers[i]) == 0: Hearers[i] += 1
-        Hearers[i] /= sum(Hearers[i])
-
-    if sum(abs(Speakers - SpeakersBefore)) < 0.1 and sum(abs(Hearers - HearersBefore)) < 0.1:
-        print 'Converged!\a'
-        break
-
-ModeMap = zeros(NMeanings,int)
-for x in range(NMeanings):
-        ModeMap[x] = max_index(Speakers[x])
-
-with open(output_filename, 'a') as mode_map_file:
-    writer = csv.writer(mode_map_file)
-    time = str(datetime.today())
-    writer.writerow([time, 0, 'A', 't' + str(ModeMap[0])])
-    for r in range(NValues-2):
-        for c in range(NHues):
-            writer.writerow([time, c, ['B','C','D','E','F','G','H','I'][r], 't' + str(ModeMap[1+r*NHues+c])])
-    writer.writerow([time, 0, 'J', 't' + str(ModeMap[329])])
-
+        PerceptualSpace = read_csv_file('perceptual-space-with-sphere.csv', [7, 8, 9])
+        Sim = read_csv_file('Munsell-Munsell-similarity.csv', range(len(PerceptualSpace)), skip_header=False)
+        Sim2 = read_csv_file('Munsell-Munsell-similarity.csv', range(len(PerceptualSpace)), skip_header=False)
+#        PerceptualSpace = read_csv_file('data/Masaoka-et-al/CIELAB-Daylight-6500K-solid-10.csv', [2, 0, 1])
+#        Sim = read_csv_file('Masaoka-Masaoka-similarity.csv', range(len(PerceptualSpace)), skip_header=False)
+#        Sim2 = read_csv_file('Munsell-Masaoka-similarity.csv', range(len(PerceptualSpace)), skip_header=False)
+        
+        run_simulation(PerceptualSpace, NForms, NGenerations, output_filename, Sim, Sim2)
