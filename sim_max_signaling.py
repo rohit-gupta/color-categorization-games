@@ -46,9 +46,9 @@ def similarity(x1, x2):
 
 @memory.cache
 def similarity_matrix(Lab1, Lab2):
+    print 'Calculating similarity matrix of size ' + str(len(Lab1)) + 'x' + str(len(Lab2)) + ' (can take a while)...'
     Sim = np.zeros((len(Lab1), len(Lab2)))
     for x1 in xrange(len(Lab1)):
-        print x1
         for x2 in xrange(len(Lab2)):
             Sim[x1][x2] = similarity(Lab1[x1], Lab2[x2])
     return(Sim)
@@ -170,14 +170,15 @@ def run_simulation(PerceptualSpace, NForms, NGenerations, output_filename):
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
-        print "Usage: python", sys.argv[0], "<number of messages> <maximum number of generations> <output filename>"
+        print "Usage: python", sys.argv[0], "<perceptual space filename> <number of messages> <maximum number of generations> <output filename>"
         sys.exit(1)
     else:
-        NForms = int(sys.argv[1])
-        NGenerations = int(sys.argv[2])
-        output_filename = sys.argv[3]
+        PerceptualSpaceFilename = sys.argv[1]
+        NForms = int(sys.argv[2])
+        NGenerations = int(sys.argv[3])
+        output_filename = sys.argv[4]
 
-#        PerceptualSpace = read_csv_file('perceptual-space-with-sphere.csv', [7, 8, 9])
-        PerceptualSpace = read_csv_file('data/Masaoka-et-al/CIELAB-Daylight-6500K-solid-5-40.csv', [2, 0, 1])
+        PerceptualSpace = read_csv_file(PerceptualSpaceFilename, [0, 1, 2])
+        
         
         run_simulation(PerceptualSpace, NForms, NGenerations, output_filename)
