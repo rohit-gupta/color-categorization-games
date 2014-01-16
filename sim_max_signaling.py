@@ -13,6 +13,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from reportlab.pdfbase import cidfonts
 
+from joblib import Memory
+memory = Memory(cachedir='tmp', verbose=0)
+
 def read_csv_file(filename, cols, skip_header=True):
     table = []
     with open(filename, 'r') as f:
@@ -38,9 +41,10 @@ def similarity(x1, x2):
     a2 = x2[1]
     b1 = x1[2]
     b2 = x2[2]
-    dist12 = sqrt((L1 - L2) ** 2 + (a1 - a2) ** 2 + (b1 - b2) ** 2)
-    return(exp(-0.001 * (dist12 ** 2)))
+    dist12 = np.sqrt((L1 - L2) ** 2 + (a1 - a2) ** 2 + (b1 - b2) ** 2)
+    return(np.exp(-0.001 * (dist12 ** 2)))
 
+@memory.cache
 def similarity_matrix(Lab1, Lab2):
     Sim = np.zeros((len(Lab1), len(Lab2)))
     for x1 in xrange(len(Lab1)):
@@ -84,16 +88,13 @@ def plot(PerceptualSpace, MunsellPalette, PerceptualModeMap, MunsellModeMap, blo
     plt.show(block=block)
     plt.pause(0.01)
 
-def run_simulation(PerceptualSpace, NForms, NGenerations, output_filename, Sim=None, Sim2=None):
+def run_simulation(PerceptualSpace, NForms, NGenerations, output_filename):
     MunsellPalette = read_csv_file('perceptual-space-with-sphere.csv', [7, 8, 9])
     
     NMeanings = len(PerceptualSpace)
     
-    if Sim == None:
-        Sim = similarity_matrix(PerceptualSpace, PerceptualSpace)
-
-    if Sim2 == None:
-        Sim2 = similarity_matrix(MunsellPalette, PerceptualSpace)
+    Sim = similarity_matrix(PerceptualSpace, PerceptualSpace)
+    Sim2 = similarity_matrix(MunsellPalette, PerceptualSpace)
 
     # uniform priors
     PMeaning = np.ones(NMeanings)
@@ -146,7 +147,7 @@ def run_simulation(PerceptualSpace, NForms, NGenerations, output_filename, Sim=N
             if np.sum(Hearers[i]) == 0: Hearers[i] += 1
             Hearers[i] /= np.sum(Hearers[i])
     
-        if np.sum(abs(Speakers - SpeakersBefore)) < 0.1 and np.sum(abs(Hearers - HearersBefore)) < 0.1:
+        if np.sum(abs(Speakers - SpeakersBefore)) < 0.01 and np.sum(abs(Hearers - HearersBefore)) < 0.01:
             print 'Converged!\a'
             break
     
@@ -176,11 +177,7 @@ if __name__ == "__main__":
         NGenerations = int(sys.argv[2])
         output_filename = sys.argv[3]
 
-        PerceptualSpace = read_csv_file('perceptual-space-with-sphere.csv', [7, 8, 9])
-        Sim = read_csv_file('Munsell-Munsell-similarity.csv', range(len(PerceptualSpace)), skip_header=False)
-        Sim2 = read_csv_file('Munsell-Munsell-similarity.csv', range(len(PerceptualSpace)), skip_header=False)
-#        PerceptualSpace = read_csv_file('data/Masaoka-et-al/CIELAB-Daylight-6500K-solid-10.csv', [2, 0, 1])
-#        Sim = read_csv_file('Masaoka-Masaoka-similarity.csv', range(len(PerceptualSpace)), skip_header=False)
-#        Sim2 = read_csv_file('Munsell-Masaoka-similarity.csv', range(len(PerceptualSpace)), skip_header=False)
+#        PerceptualSpace = read_csv_file('perceptual-space-with-sphere.csv', [7, 8, 9])
+        PerceptualSpace = read_csv_file('data/Masaoka-et-al/CIELAB-Daylight-6500K-solid-5-40.csv', [2, 0, 1])
         
-        run_simulation(PerceptualSpace, NForms, NGenerations, output_filename, Sim, Sim2)
+        run_simulation(PerceptualSpace, NForms, NGenerations, output_filename)
