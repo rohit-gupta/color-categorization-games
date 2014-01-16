@@ -9,10 +9,10 @@ inspect_by_layer <- function(original, selection, slice_dim, step=10) {
 
 ray_tracing_2d <- function(edges, dim1, dim2, step, inner_step) {
     y <- data.frame()
-    for (i in seq(min(edges[, dim1]), max(edges[, dim1]), by=step)) {
+    for (i in seq(-200, 200, by=step)) {#seq(min(edges[, dim1]), max(edges[, dim1]), by=step)) {
         inside <- FALSE
         on_edge <- FALSE
-        for (j in seq(min(edges[, dim2]), max(edges[, dim2]), by=inner_step)) {
+        for (j in seq(-200, 200, by=inner_step)) {#seq(min(edges[, dim2]), max(edges[, dim2]), by=inner_step)) {
             #cat(dim1,":",i,dim2,":",j,"\n")
             if (any(edges[, dim1] == i & edges[, dim2] == j)) {
                 if (!on_edge) {
@@ -45,7 +45,7 @@ process_file <- function(file, step=10) {
     x$b <- round(x$b)
 
     solid <- data.frame()
-    for (k in seq(min(x$L), max(x$L), by=step)) {
+    for (k in seq(min(x$L), max(x$L), by=5)) {
         print(k)
 
         y <- ray_tracing_2d(x[x$L == k,], 'a', 'b', step, 1)
