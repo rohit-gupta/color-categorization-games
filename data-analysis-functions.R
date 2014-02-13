@@ -117,7 +117,7 @@ match.all.languages <- function(modes1, modes2, unmatched.threshold1=16, unmatch
     langs1 <- unique(modes1$lang.name)
     langs2 <- unique(modes2$lang.name)
     match$accuracy.table <- as.data.frame(replicate(length(langs2), replicate(length(langs1), NA)), row.names=langs1)
-    colnames(match$accuracy.table) <- langs2
+    #colnames(match$accuracy.table) <- langs2
     for (lang1 in langs1) {
         for (lang2 in langs2) {
             tmp <- match[[lang1]][[lang2]]

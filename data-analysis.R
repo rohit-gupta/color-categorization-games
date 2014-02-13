@@ -52,6 +52,11 @@ if (!file.exists("wcs-wcs-match.Rdata")) {
 }
 
 cat("Reading all simulation results...\n")
+reg3.modes <- read.simulation("results/Regier3.csv")
+reg4.modes <- read.simulation("results/Regier4.csv")
+reg5.modes <- read.simulation("results/Regier5.csv")
+reg6.modes <- read.simulation("results/Regier6.csv")
+
 sim3.modes <- read.simulation("results/simulations-3.csv")
 sim4.modes <- read.simulation("results/simulations-4.csv")
 sim5.modes <- read.simulation("results/simulations-5.csv")
@@ -72,6 +77,12 @@ rand5.modes <- read.simulation("results/random-5.csv")
 rand6.modes <- read.simulation("results/random-6.csv")
 rand7.modes <- read.simulation("results/random-7.csv")
 rand8.modes <- read.simulation("results/random-8.csv")
+
+cat("Matching Regier et al results with WCS languages...\n")
+reg3.wcs.match <- match.all.languages(reg3.modes, wcs.modes)
+reg4.wcs.match <- match.all.languages(reg4.modes, wcs.modes)
+reg5.wcs.match <- match.all.languages(reg5.modes, wcs.modes)
+reg6.wcs.match <- match.all.languages(reg6.modes, wcs.modes)
 
 cat("Matching simulation results with WCS languages...\n")
 sim3.wcs.match <- match.all.languages(sim3.modes, wcs.modes)
@@ -98,6 +109,13 @@ rand7.wcs.match <- match.all.languages(rand7.modes, wcs.modes)
 rand8.wcs.match <- match.all.languages(rand8.modes, wcs.modes)
 
 cat("Calculating aggregated summaries...\n")
+reg.wcs.match.summ <-
+    rbind(summary.match(reg3.wcs.match$accuracy.table)
+         ,summary.match(reg4.wcs.match$accuracy.table)
+         ,summary.match(reg5.wcs.match$accuracy.table)
+         ,summary.match(reg6.wcs.match$accuracy.table)
+         )
+rownames(reg.wcs.match.summ) <- 3:6
 sim.wcs.match.summ <-
     rbind(summary.match(sim3.wcs.match$accuracy.table)
          ,summary.match(sim4.wcs.match$accuracy.table)
