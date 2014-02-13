@@ -40,58 +40,16 @@ classify.languages <- function(modes=wcs.modes, chips.threshold=16) {
 }
 
 match.languages <- function(lang1.name, lang2.name, modes1=wcs.modes, modes2=wcs.modes) {
+    require(entropy)
+    
     aligned <- merge(modes1[modes1$lang.name==lang1.name,], modes2[modes2$lang.name==lang2.name,], by=c("wcs.hue","wcs.value"))
     terms1 <- aligned$term.x
     terms2 <- aligned$term.y
     
     confusion.table <- table(terms1, terms2)
-    
+
     match <- list()
-    match$terms <- data.frame()
-    tmp <- as.data.frame(confusion.table)
-    colnames(tmp) <- c(lang1.name, lang2.name, 'num.matches')
-    while (nrow(tmp) > 0 && max(tmp$num.matches) > 0) {
-        t1data <- tmp[tmp$num.matches == max(tmp$num.matches), ][1, ]
-        
-        t1 <- as.character(t1data[,lang1.name])
-        t2 <- as.character(t1data[,lang2.name])
-        t1data$precision <- t1data$num.matches / sum(confusion.table[t1, ])
-        t1data$recall <- t1data$num.matches / sum(confusion.table[ ,t2])
-        t1data$f.measure <- 2 * ((t1data$precision * t1data$recall) / (t1data$precision + t1data$recall))
-        
-        match$terms <- rbind(match$terms, t1data)
-        
-        tmp <- tmp[tmp[,lang1.name] != t1 & tmp[,lang2.name] != t2, ]
-    }
-
-    match$accuracy <- sum(match$terms$num.matches) / sum(confusion.table)
-
-    match$unmatched.count <- 0
-    unmatched1 <- rownames(confusion.table)[!(rownames(confusion.table) %in% match$terms[,lang1.name])]
-    unmatched2 <- colnames(confusion.table)[!(colnames(confusion.table) %in% match$terms[,lang2.name])]
-    if (length(unmatched1) != 0 || length(unmatched2) != 0) {
-        match$unmatched <- data.frame()
-        if (length(unmatched1) != 0) {
-            for (t1 in unmatched1) {
-                t1data <- list()
-                t1data$term <- t1
-                t1data$occurrences <- sum(confusion.table[t1,])
-
-                match$unmatched <- rbind(match$unmatched, data.frame(t1data))
-            }
-        }
-        if (length(unmatched2) != 0) {
-            for (t2 in unmatched2) {
-                t2data <- list()
-                t2data$term <- t2
-                t2data$occurrences <- sum(confusion.table[,t2])
-
-                match$unmatched <- rbind(match$unmatched, data.frame(t2data))
-            }
-        }
-        match$unmatched.count <- sum(match$unmatched$occurrences)
-        warning(match$unmatched.count, " unmatched data points.")
-    }
+    match$accuracy <- mi.plugin(confusion.table) / max(entropy(table(terms1)), entropy(table(terms2)))
         
     return(match)
 }
