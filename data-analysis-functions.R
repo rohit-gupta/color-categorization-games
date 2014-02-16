@@ -48,46 +48,27 @@ match.languages <- function(lang1.name, lang2.name, modes1=wcs.modes, modes2=wcs
     
     confusion.table <- table(terms1, terms2)
 
-    match <- list()
-    match$accuracy <- mi.plugin(confusion.table) / max(entropy(table(terms1)), entropy(table(terms2)))
+    similarity <- mi.plugin(confusion.table) / max(entropy(table(terms1)), entropy(table(terms2)))
         
-    return(match)
+    return(similarity)
 }
 
-match.all.languages <- function(modes1, modes2, unmatched.threshold1=16, unmatched.threshold2=16) {
-    match <- list()
-    
-    term.count1 <- classify.languages(modes1, unmatched.threshold1)
-    term.count2 <- classify.languages(modes2, unmatched.threshold2)
-    for (lang1 in term.count1$lang.name) {
-        cat("Calculating matches for", lang1, "against:\n")
-        nterms <- term.count1[term.count1$lang.name == lang1, "num.terms"]
-        match[[lang1]] <- list()
-        modes2.filtered <- modes2[modes2$lang.name %in% term.count2[term.count2$num.terms == nterms, "lang.name"],]
-        for (lang2 in unique(modes2.filtered$lang.name)) {
-            cat("\t", lang2)
-            tmp <- match.languages(lang1, lang2, modes1, modes2)
-            match[[lang1]][[lang2]] <- tmp
-            cat(" -", tmp$accuracy, "\n")
-        }
-    }
-    
+match.all.languages <- function(modes1, modes2) {
     langs1 <- unique(modes1$lang.name)
     langs2 <- unique(modes2$lang.name)
-    match$accuracy.table <- matrix(ncol=length(langs2), nrow=length(langs1), dimnames=list(langs1, langs2))
+    similarity.table <- matrix(ncol=length(langs2), nrow=length(langs1), dimnames=list(langs1, langs2))
     for (lang1 in langs1) {
         for (lang2 in langs2) {
-            tmp <- match[[lang1]][[lang2]]
-            if (!is.null(tmp)) {
-                match$accuracy.table[lang1, lang2] <- tmp$accuracy
-            }
+            cat('Calculating similarity between', lang1, 'and', lang2, '\n')
+            similarity.table[lang1, lang2] <- match.languages(lang1, lang2, modes1, modes2)
         }
     }
     
-    return(match)
+    return(similarity.table)
 }
 
 summary.match <- function(accuracy.table, per.row=FALSE) {
+    accuracy.table <- as.data.frame(accuracy.table)
     filtered <- accuracy.table[,!sapply(accuracy.table, function(y){all(is.na(y))})]
     if (per.row) {
         summ <- as.data.frame(t(sapply(as.data.frame(t(filtered)), summary)))
