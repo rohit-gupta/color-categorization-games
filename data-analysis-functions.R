@@ -90,3 +90,26 @@ filter.wcs.match <- function(accuracy.table, num.terms) {
     }
     return(filtered)
 }
+
+evaluate.clustering <- function(clustering, similarity.matrix) {
+    similarities.per.cluster <- list()
+    for (cluster in 1:length(clustering@clusters)) {
+        similarities.per.cluster[[cluster]] <- vector()
+        for (l1 in clustering[[cluster]]) {
+            for (l2 in clustering[[cluster]]) {
+                if (l2 > l1) {
+                    similarities.per.cluster[[cluster]] <- c(similarities.per.cluster[[cluster]], similarity.matrix[l1,l2])
+                }
+            }
+        }
+    }
+    return(similarities.per.cluster)
+}
+
+evaluate.language <- function(clustering, similarity.row) {
+  similarities.per.cluster <- list()
+  for (cluster in 1:length(clustering@clusters)) {
+    similarities.per.cluster[[cluster]] <- similarity.row[clustering[[cluster]]]
+  }
+  return(similarities.per.cluster)
+}

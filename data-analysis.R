@@ -1,4 +1,5 @@
 source('data-analysis-functions.R')
+library(apcluster)
 
 library(memoise)
 if (!exists('match.all.languages.m')) {
@@ -113,47 +114,25 @@ rand6.wcs.match <- match.all.languages.m(rand6.modes, wcs.modes)
 rand7.wcs.match <- match.all.languages.m(rand7.modes, wcs.modes)
 rand8.wcs.match <- match.all.languages.m(rand8.modes, wcs.modes)
 
-cat("Calculating aggregated summaries...\n")
-reg.wcs.match.summ <-
-    rbind(summary.match(reg3.wcs.match)
-         ,summary.match(reg4.wcs.match)
-         ,summary.match(reg5.wcs.match)
-         ,summary.match(reg6.wcs.match)
-         )
-rownames(reg.wcs.match.summ) <- 3:6
-sim.wcs.match.summ <-
-    rbind(summary.match(sim3.wcs.match)
-         ,summary.match(sim4.wcs.match)
-         ,summary.match(sim5.wcs.match)
-         ,summary.match(sim6.wcs.match)
-         ,summary.match(sim7.wcs.match)
-         ,summary.match(sim8.wcs.match)
-         )
-rownames(sim.wcs.match.summ) <- 3:8
-sph.wcs.match.summ <-
-    rbind(summary.match(sph3.wcs.match)
-         ,summary.match(sph4.wcs.match)
-         ,summary.match(sph5.wcs.match)
-         ,summary.match(sph6.wcs.match)
-         ,summary.match(sph7.wcs.match)
-         ,summary.match(sph8.wcs.match)
-         )
-rownames(sph.wcs.match.summ) <- 3:8
-rand.wcs.match.summ <-
-    rbind(summary.match(rand3.wcs.match)
-         ,summary.match(rand4.wcs.match)
-         ,summary.match(rand5.wcs.match)
-         ,summary.match(rand6.wcs.match)
-         ,summary.match(rand7.wcs.match)
-         ,summary.match(rand8.wcs.match)
-         )
-rownames(rand.wcs.match.summ) <- 3:8
-wcs.wcs.match.summ <-
-    rbind(summary.match(filter.wcs.match(wcs.wcs.match, 3))
-         ,summary.match(filter.wcs.match(wcs.wcs.match, 4))
-         ,summary.match(filter.wcs.match(wcs.wcs.match, 5))
-         ,summary.match(filter.wcs.match(wcs.wcs.match, 6))
-         ,summary.match(filter.wcs.match(wcs.wcs.match, 7))
-         ,summary.match(filter.wcs.match(wcs.wcs.match, 8))
-         )
-rownames(wcs.wcs.match.summ) <- 3:8
+cat("Calculating clustering of WCS languages...\n")
+clustering <- apcluster(s=wcs.wcs.match)
+clustering.eval <- evaluate.clustering(clustering=clustering, similarity.matrix=wcs.wcs.match)
+
+cat("Evaluating simulations against clustering...\n")
+simulations.eval <- list()
+simulations.eval[['Reg3']] <- evaluate.language(clustering=clustering, similarity.row=reg3.wcs.match)
+simulations.eval[['Reg4']] <- evaluate.language(clustering=clustering, similarity.row=reg4.wcs.match)
+simulations.eval[['Reg5']] <- evaluate.language(clustering=clustering, similarity.row=reg5.wcs.match)
+simulations.eval[['Reg6']] <- evaluate.language(clustering=clustering, similarity.row=reg6.wcs.match)
+for(sim in 1:nrow(sim3.wcs.match)) simulations.eval[[paste(sep='', 'sim3.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sim3.wcs.match[sim,])
+for(sim in 1:nrow(sim4.wcs.match)) simulations.eval[[paste(sep='', 'sim4.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sim4.wcs.match[sim,])
+for(sim in 1:nrow(sim5.wcs.match)) simulations.eval[[paste(sep='', 'sim5.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sim5.wcs.match[sim,])
+for(sim in 1:nrow(sim6.wcs.match)) simulations.eval[[paste(sep='', 'sim6.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sim6.wcs.match[sim,])
+for(sim in 1:nrow(sim7.wcs.match)) simulations.eval[[paste(sep='', 'sim7.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sim7.wcs.match[sim,])
+for(sim in 1:nrow(sim8.wcs.match)) simulations.eval[[paste(sep='', 'sim8.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sim8.wcs.match[sim,])
+for(sim in 1:nrow(sph3.wcs.match)) simulations.eval[[paste(sep='', 'sph3.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sph3.wcs.match[sim,])
+for(sim in 1:nrow(sph4.wcs.match)) simulations.eval[[paste(sep='', 'sph4.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sph4.wcs.match[sim,])
+for(sim in 1:nrow(sph5.wcs.match)) simulations.eval[[paste(sep='', 'sph5.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sph5.wcs.match[sim,])
+for(sim in 1:nrow(sph6.wcs.match)) simulations.eval[[paste(sep='', 'sph6.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sph6.wcs.match[sim,])
+for(sim in 1:nrow(sph7.wcs.match)) simulations.eval[[paste(sep='', 'sph7.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sph7.wcs.match[sim,])
+for(sim in 1:nrow(sph8.wcs.match)) simulations.eval[[paste(sep='', 'sph8.', sim)]] <- evaluate.language(clustering=clustering, similarity.row=sph8.wcs.match[sim,])
