@@ -66,16 +66,18 @@ def speaker_mode_map(Lab1, Strategy, Lab2=None, Similarity12=None):
         ModeMap[x] = np.argmax(Strategy[y])
     return(ModeMap)
 
-def plot(PerceptualSpace, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=False):
+def plot(PerceptualSpace, Priors, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=False):
     plt.clf()
 #    fig = plt.figure()
-    ax1 = plt.subplot(2, 2, 1, projection='3d')
-    ax1.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=PerceptualModeMap)
-    ax2 = plt.subplot(2, 2, 2, projection='3d')
-    ax2.scatter(MunsellPalette[:, 1], MunsellPalette[:, 2], MunsellPalette[:, 0], c=MunsellModeMap)
-    ax2.set_xlim(ax1.get_xlim())
-    ax2.set_ylim(ax1.get_ylim())
-    ax2.set_zlim(ax1.get_zlim())
+    ax1 = plt.subplot(2, 3, 1, projection='3d')
+    ax1.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=Priors)
+    ax2 = plt.subplot(2, 3, 2, projection='3d')
+    ax2.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=PerceptualModeMap)
+    ax3 = plt.subplot(2, 3, 3, projection='3d')
+    ax3.scatter(MunsellPalette[:, 1], MunsellPalette[:, 2], MunsellPalette[:, 0], c=MunsellModeMap)
+    ax3.set_xlim(ax1.get_xlim())
+    ax3.set_ylim(ax1.get_ylim())
+    ax3.set_zlim(ax1.get_zlim())
 #        for m in xrange(NForms):
 #            ax = plt.subplot(3, NForms, NForms + 1 + m, projection='3d')
 #            ax.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=Speakers[:, m])
@@ -83,12 +85,12 @@ def plot(PerceptualSpace, MunsellPalette, PerceptualModeMap, MunsellModeMap, blo
 #            ax.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=Hearers[m])
     tmpModeMap = MunsellModeMap[range(1, len(MunsellModeMap) - 1)]
     tmpModeMap.shape = (8, 41)
-    ax2 = plt.subplot(2, 1, 2)
+    ax4 = plt.subplot(2, 1, 2)
     plt.imshow(tmpModeMap, interpolation='none')
     plt.show(block=block)
     plt.pause(0.01)
 
-def run_simulation(PerceptualSpace, NForms, NGenerations, output_filename):
+def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filename):
     MunsellPalette = read_csv_file('perceptual-space-with-sphere.csv', [7, 8, 9])
     
     NMeanings = len(PerceptualSpace)
@@ -96,11 +98,6 @@ def run_simulation(PerceptualSpace, NForms, NGenerations, output_filename):
     Sim = similarity_matrix(PerceptualSpace, PerceptualSpace)
     Sim2 = similarity_matrix(MunsellPalette, PerceptualSpace)
 
-    # uniform priors
-    PMeaning = np.ones(NMeanings)
-    
-    PMeaning /= np.sum(PMeaning)
-    
     Speakers = random.random((NMeanings, NForms))
     Hearers = random.random((NForms, NMeanings))
     
@@ -116,7 +113,7 @@ def run_simulation(PerceptualSpace, NForms, NGenerations, output_filename):
         PerceptualModeMap = speaker_mode_map(PerceptualSpace, Speakers)
         MunsellModeMap = speaker_mode_map(PerceptualSpace, Speakers, MunsellPalette, Sim2)
         
-        plot(PerceptualSpace, MunsellPalette, PerceptualModeMap, MunsellModeMap)
+        plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap)
     
         SpeakersBefore = copy.deepcopy(Speakers)
         HearersBefore = copy.deepcopy(Hearers)
@@ -151,7 +148,7 @@ def run_simulation(PerceptualSpace, NForms, NGenerations, output_filename):
             print 'Converged!\a'
             break
     
-    plot(PerceptualSpace, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
+    plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
     
     MunsellModeMap = speaker_mode_map(PerceptualSpace, Speakers, MunsellPalette, Sim2)
     
@@ -179,6 +176,6 @@ if __name__ == "__main__":
         output_filename = sys.argv[4]
 
         PerceptualSpace = read_csv_file(PerceptualSpaceFilename, [0, 1, 2])
+        PMeaning = read_csv_file(PerceptualSpaceFilename, [4])[:,0]
         
-        
-        run_simulation(PerceptualSpace, NForms, NGenerations, output_filename)
+        run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filename)
