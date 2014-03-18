@@ -176,6 +176,6 @@ if __name__ == "__main__":
         output_filename = sys.argv[4]
 
         PerceptualSpace = read_csv_file(PerceptualSpaceFilename, [0, 1, 2])
-        PMeaning = read_csv_file(PerceptualSpaceFilename, [4])[:,0]
+        PMeaning = read_csv_file(PerceptualSpaceFilename, [3])[:,0]
         
         run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filename)
