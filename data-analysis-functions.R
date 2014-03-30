@@ -96,20 +96,22 @@ match.languages <- function(lang1.name, lang2.name, modes1=wcs.modes, modes2=wcs
             similarities <- c(similarities, normalized.mutual.information(imputate(terms1), imputate(terms2), na.scale=FALSE))
         }
         similarity <- median(similarities)        
+    } else {
+      stop('Method for handling NA\'s ', na.handling, ' unknown. Choose from \'none\', \'scale\', or \'imputate\'.')
     }
     
         
     return(similarity)
 }
 
-match.all.languages <- function(modes1, modes2) {
+match.all.languages <- function(modes1, modes2, na.handling='imputate') {
     langs1 <- unique(modes1$lang.name)
     langs2 <- unique(modes2$lang.name)
     similarity.table <- matrix(ncol=length(langs2), nrow=length(langs1), dimnames=list(langs1, langs2))
     for (lang1 in langs1) {
         for (lang2 in langs2) {
             cat('Calculating similarity between', lang1, 'and', lang2, '\n')
-            similarity.table[lang1, lang2] <- match.languages(lang1, lang2, modes1, modes2, na.handling='imputate')
+            similarity.table[lang1, lang2] <- match.languages(lang1, lang2, modes1, modes2, na.handling=na.handling)
         }
     }
     
