@@ -135,6 +135,21 @@ summary.match <- function(accuracy.table, per.row=FALSE) {
     return(summ)
 }
 
+plot.scenario.similarities <- function(similarity.table, scenario.prefix, number.of.terms, additional.prefix='RKK') {
+  tmppp <- as.list(as.data.frame(t(similarity.table)))
+  tmp <- data.frame(Language.name=c(), Similarity=c())
+  for(lang in names(tmppp)) {
+    tmp <- rbind(tmp, data.frame(Language.name=replicate(n=length(tmppp[[lang]]),expr=lang)
+                                ,Similarity=tmppp[[lang]]))
+  }
+  p <- ggplot(tmp[grep(pattern=paste(sep='', scenario.prefix, number.of.terms, '|', additional.prefix, number.of.terms)
+                      ,x=tmp$Language.name),]
+             ,aes(x=Language.name, y=Similarity))
+  p <- p + geom_jitter(colour='grey')
+  p <- p + geom_boxplot() + coord_flip() + theme_bw()
+  return(p)
+}
+
 filter.wcs.match <- function(accuracy.table, num.terms) {
     terms.count <- classify.languages(wcs.modes)
     langs <- terms.count$lang.name[terms.count$num.terms == num.terms]
