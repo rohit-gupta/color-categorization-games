@@ -69,11 +69,11 @@ def speaker_mode_map(Lab1, Strategy, Lab2=None, Similarity12=None):
 def plot(PerceptualSpace, Priors, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=False):
     plt.clf()
 #    fig = plt.figure()
-    ax1 = plt.subplot(2, 3, 1, projection='3d')
+    ax1 = plt.subplot(2, 2, 1, projection='3d')
     ax1.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=Priors)
-    ax2 = plt.subplot(2, 3, 2, projection='3d')
-    ax2.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=PerceptualModeMap)
-    ax3 = plt.subplot(2, 3, 3, projection='3d')
+#    ax2 = plt.subplot(2, 3, 2, projection='3d')
+#    ax2.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=PerceptualModeMap)
+    ax3 = plt.subplot(2, 2, 2, projection='3d')
     ax3.scatter(MunsellPalette[:, 1], MunsellPalette[:, 2], MunsellPalette[:, 0], c=MunsellModeMap)
     ax3.set_xlim(ax1.get_xlim())
     ax3.set_ylim(ax1.get_ylim())
@@ -90,7 +90,7 @@ def plot(PerceptualSpace, Priors, MunsellPalette, PerceptualModeMap, MunsellMode
     plt.show(block=block)
     plt.pause(0.01)
 
-def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filename):
+def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filename, measurements_filename):
     MunsellPalette = read_csv_file('perceptual-space-with-sphere.csv', [7, 8, 9])
     
     NMeanings = len(PerceptualSpace)
@@ -148,7 +148,7 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
             print 'Converged!\a'
             break
     
-    plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
+#    plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
     
     MunsellModeMap = speaker_mode_map(PerceptualSpace, Speakers, MunsellPalette, Sim2)
     
@@ -163,19 +163,27 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
             for c in xrange(NHues):
                 writer.writerow([time, c, ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'][r], 't' + str(MunsellModeMap[1 + r * NHues + c])])
         writer.writerow([time, 0, 'J', 't' + str(MunsellModeMap[329])])
+        
+    ExpectedUtility = sum(PMeaning[t1] * Speakers[t1,m] * Hearers[m,t2] * Sim[t1,t2] for t1 in xrange(NMeanings) for m in xrange(NForms) for t2 in xrange(NMeanings))
+
+    with open(measurements_filename, 'a') as measurements_file:
+        writer = csv.writer(measurements_file)
+        writer.writerow([time, ExpectedUtility])
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 4:
-        print "Usage: python", sys.argv[0], "<perceptual space filename> <number of messages> <maximum number of generations> <output filename>"
+    if len(sys.argv) < 6:
+        print "Usage: python", sys.argv[0], "<perceptual space filename> <priors column number (0+)> <number of messages> <maximum number of generations> <output filename> <measurements filename>"
         sys.exit(1)
     else:
         PerceptualSpaceFilename = sys.argv[1]
-        NForms = int(sys.argv[2])
-        NGenerations = int(sys.argv[3])
-        output_filename = sys.argv[4]
+        PriorsColumn = int(sys.argv[2])
+        NForms = int(sys.argv[3])
+        NGenerations = int(sys.argv[4])
+        output_filename = sys.argv[5]
+        measurements_filename = sys.argv[6]
 
         PerceptualSpace = read_csv_file(PerceptualSpaceFilename, [0, 1, 2])
-        PMeaning = read_csv_file(PerceptualSpaceFilename, [3])[:,0]
+        PMeaning = read_csv_file(PerceptualSpaceFilename, [PriorsColumn])[:,0]
         
-        run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filename)
+        run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filename, measurements_filename)
