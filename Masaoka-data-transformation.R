@@ -1,3 +1,5 @@
+#! /usr/bin/Rscript --vanilla
+
 inspect_by_layer <- function(original, selection, slice_dim, step=10) {
     extra_dims <- colnames(original)[colnames(original) != slice_dim]
     for (i in seq(min(selection[,slice_dim]), max(selection[,slice_dim]), by=step)) {
@@ -32,10 +34,8 @@ ray_tracing_2d <- function(edges, dim1, dim2, step, inner_step) {
     return(y)
 }
 
-process_file <- function(file, step=10) {
+process <- function(x, step=10) {
     expected_columns <- c('a','b','L')
-
-    x <- read.csv(file)
 
     stopifnot(colnames(x) == expected_columns)
 
@@ -63,6 +63,32 @@ process_file <- function(file, step=10) {
 
 process_all <- function(files) {
     for (file in files) {
-        process_file(file)
+        x <- read.csv(file)
+        process(x)
     }
+}
+
+# Executable in command line
+args <- commandArgs(trailingOnly=TRUE)
+if (length(args) > 0) {
+  if (length(args) < 3) {
+    cat('Arguments: <Masaoka\'s input data file> <distance between points> <output file name>\n')
+  } else {
+    masaoka_input <- args[1]
+    step <- as.integer(args[2])
+    output <- args[3]
+    if (!file.exists(masaoka_input)) {
+      stop('Could not find input file ', masaoka_input)
+    }
+    original <- read.csv(masaoka_input)
+    solid <- process(x=original, step=step)
+    cat('Press <ENTER> to start validation')
+    readLines(con = "stdin", n=1)
+    X11()
+    inspect_by_layer(original=original, selection=solid, slice_dim='L', step=step)
+    cat('Press <ENTER> to write to output file', output)
+    readLines(con = "stdin", n=1)
+    write.csv(solid, file=output, row.names=FALSE)
+#     cat('Bye-bye!\n')
+  }
 }
