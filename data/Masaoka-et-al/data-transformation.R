@@ -1,7 +1,7 @@
 inspect_by_layer <- function(original, selection, slice_dim, step=10) {
     extra_dims <- colnames(original)[colnames(original) != slice_dim]
     for (i in seq(min(selection[,slice_dim]), max(selection[,slice_dim]), by=step)) {
-        plot(original[original[,slice_dim] == i, extra_dims], col='grey')
+        plot(original[original[,slice_dim] == i, extra_dims], col='grey', main=paste(slice_dim,'=',i))
         points(selection[selection[,slice_dim] == i, extra_dims])
         Sys.sleep(5)
     }
@@ -45,7 +45,7 @@ process_file <- function(file, step=10) {
     x$b <- round(x$b)
 
     solid <- data.frame()
-    for (k in seq(min(x$L), max(x$L), by=5)) {
+    for (k in seq(min(x$L), max(x$L), by=step)) {
         print(k)
 
         y <- ray_tracing_2d(x[x$L == k,], 'a', 'b', step, 1)
