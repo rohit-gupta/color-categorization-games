@@ -70,12 +70,13 @@ priors.calculation <- function(space, images.dir, blurring.factor=NA) {
 # Executable in command line
 args <- commandArgs(trailingOnly=TRUE)
 if (length(args) > 0) {
-  if (length(args) < 3) {
-    cat('Arguments: <CIELAB spectrum file> <images directory> <blurring factor>\n')
+  if (length(args) < 4) {
+    cat('Arguments: <CIELAB spectrum file> <images directory> <blurring factor> <output file>\n')
   } else {
     spectrum_file <- args[1]
     images_dir <- args[2]
     blur <- as.integer(args[3])
+    output_file <- args[4]
     if (!file.exists(spectrum_file)) {
       stop('Could not find input file ', spectrum_file)
     }
@@ -86,8 +87,8 @@ if (length(args) > 0) {
     priors <- priors.calculation(spectrum, images_dir, blur)
     spectrum[,paste(sep='.','prior.McGill', blur)] <- priors
     print(head(spectrum))
-    cat('Press <ENTER> to write priors back to file')
+    cat('Press <ENTER> to write priors to', output_file)
     readLines(con = "stdin", n=1)
-    write.csv(spectrum, file=spectrum_file, row.names=FALSE)
+    write.csv(priors, file=output_file, row.names=FALSE)
   }
 }
