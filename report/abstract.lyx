@@ -1,0 +1,178 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\options round
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2.5cm
+\rightmargin 2.5cm
+\bottommargin 2.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Re-explaining the universal patterns of color categorization
+\end_layout
+
+\begin_layout Standard
+Ever since Berlin and Kay's 
+\shape italic
+Basic Color Terms
+\shape default
+ (1969), linguistic categorization of color, with its apparent universal
+ tendencies, constitutes a widely discussed topic at the interface of linguistic
+s, philosophy and cognitive psychology.
+ For a long time, the discussion had been polarized between the universalists
+ (such as Paul Kay) and the relativists (such as Barbara Saunders), who
+ differ in their opinions both as to how strong the reported cross-linguistic
+ tendencies of color categorization actually are, and as to how such tendencies
+ are to be explained.
+ Some color categorization models proposed more recently (
+\emph on
+e.g.
+\begin_inset space \space{}
+\end_inset
+
+
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "Jameson09b,Baronchelli10,Loreto12"
+
+\end_inset
+
+) bridge the opposition by incorporating both universalist and relativist
+ insights: the role of the shared color space on one hand, emergence of
+ categories from linguistic interaction on the other.
+ We believe, however, these models to be problematic as regards the choice
+ of the perceptual and interactional principles employed.
+ Moreover, the authors do not provide a transparent and satisfactory method
+ of evaluation.
+ In this article, we adopt the general game-theoretic approach, but improve
+ substantively on both aspects.
+ From this perspective, we also aim to examine the claim by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Regier07"
+
+\end_inset
+
+ that universal patterns of color categorization can be explained in terms
+ of optimal partitions of the irregular space of colors.
+\end_layout
+
+\begin_layout Standard
+We model the linguistic categorization of color by means of dynamic game-theoret
+ic interaction of agents in a population, using similarity-maximization
+ signaling games in the spirit of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rooij07"
+
+\end_inset
+
+.
+ The agents exchange messages about points within the human visible spectrum
+ represented in the CIELAB color space, which is supposed to capture human-like
+ perceived similarity and difference between particular colors.
+ Furthermore, we enhance the perceptual space with quasi-realistic probabilities
+ based on the frequency of occurrence of each color in a natural environment.
+ We project the learned signaling strategies onto the 330 Munsell chips
+ and evaluate the variants of our model against the empirical data provided
+ by the World Color Survey (
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "WCS,WCSdata"
+
+\end_inset
+
+).
+ Our assumption is that a model which, based on sufficiently realistic principle
+s, generates realistic categorical partitions is relevant with respect to
+ explaining the patterns of color categorization in the languages of the
+ world.
+ 
+\end_layout
+
+\begin_layout Standard
+The preliminary results suggest that our model has a predictive power comparable
+ to that of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Regier07"
+
+\end_inset
+
+, while having more realistic motivations in several respects.
+ On a more general level, we establish a, so far missing, methodology of
+ evaluating explanatory claims regarding the universal patterns of color
+ categorization.
+ 
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "sample,bibliography_colors_upgrade"
+options "plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
