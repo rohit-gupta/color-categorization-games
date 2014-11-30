@@ -1,0 +1,512 @@
+plot.mode(unique(sim.modes.new$lang.name)[9],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[10],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[11],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[12],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[13],sim.modes.new)
+sim.modes.new <- read.simulation(filename='results/new/spectrum-McGill-smoothing-10-3.csv')
+plot.mode(unique(sim.modes.new$lang.name)[1],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[2],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[3],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[4],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[5],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[6],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[7],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[8],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[9],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[10],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[11],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[12],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[13],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[14],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[15],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[16],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[17],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[18],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[19],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[20],sim.modes.new)
+sim.modes.new <- read.simulation(filename='results/new/spectrum-McGill-smoothing-30-3.csv')
+plot.mode(unique(sim.modes.new$lang.name)[1],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[2],sim.modes.new)
+plot.mode(unique(sim.modes.new$lang.name)[3],sim.modes.new)
+plot.all.modes(unique(sim.modes.new$lang.name),sim.modes.new)
+sim.modes.new <- read.simulation(filename='results/new/spectrum-McGill-smoothing-10-4.csv')
+plot.all.modes(unique(sim.modes.new$lang.name),sim.modes.new)
+sim.modes.new <- read.simulation(filename='results/new-simulations-McGill-some-smoothing-3.csv')
+plot.all.modes(unique(sim.modes.new$lang.name),sim.modes.new)
+sim.modes.new <- read.simulation(filename='results/new-simulations-McGill-some-smoothing-4.csv')
+plot.all.modes(unique(sim.modes.new$lang.name),sim.modes.new)
+sim.modes.new <- read.simulation(filename='results/new-simulations-McGill-some-smoothing-5.csv')
+plot.all.modes(unique(sim.modes.new$lang.name),sim.modes.new)
+sim.modes.new <- read.simulation(filename='results/new-simulations-McGill-some-smoothing-6.csv')
+plot.all.modes(unique(sim.modes.new$lang.name),sim.modes.new)
+sort(sim.wcs.match.imputated['CO3.5',],decreasing=T)[1:3]
+wcs.wcs.match.imputated['Wobé','Wobé']
+sort(sim.wcs.match.imputated['CO4.5',],decreasing=T)[1:3]
+wcs.wcs.match.imputated['Múra Pirahá','Múra Pirahá']
+sort(sim.wcs.match.imputated['CO5.8',],decreasing=T)[1:3]
+wcs.wcs.match.imputated['Ocaina','Ocaina']
+sort(sim.wcs.match.imputated['CO6.4',],decreasing=T)[1:3]
+wcs.wcs.match.imputated['Zapotec','Zapotec']
+sort(sim.wcs.match.imputated['RKK6.1',],decreasing=T)[1:3]
+ks.test(sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.1',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.1',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.2',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.3',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.4',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.5',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.6',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.7',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.8',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.9',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK3.1',],sim.wcs.match.imputated['CO3.10',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.1',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.2',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.3',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.4',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.5',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.6',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.7',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.8',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.9',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK4.1',],sim.wcs.match.imputated['CO4.10',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.1',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.2',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.3',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.4',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.5',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.6',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.7',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.8',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.9',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK5.1',],sim.wcs.match.imputated['CO5.10',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.1',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.2',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.3',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.4',])
+sort(sim.wcs.match.imputated['CO6.4',], decreasing=T)[1:3]
+plot.mode('Múra Pirahá')
+plot.mode('Zapotec')
+plot.mode('Mayoruna')
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.5',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.6',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.7',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.8',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.9',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],sim.wcs.match.imputated['CO6.10',])
+sim.sim.match <- match.all.languages(sim.modes, sim.modes, na.handling=)
+sim.sim.match <- match.all.languages(sim.modes, sim.modes, na.handling='none')
+sim.sim.match['RKK3.1',]
+sim.sim.match['RKK3.1',5:14]
+sim.sim.match['RKK3.1',15:24]
+sim.sim.match['RKK3.1',25:34]
+sim.sim.match['RKK3.1',35:44]
+sort(sim.wcs.match.imputated['CO4.8',], decreasing=T)[1:3]
+plot.mode('Bauzi')
+sort(sim.wcs.match.imputated['CO4.5',], decreasing=T)[1:3]
+sort(sim.wcs.match.imputated['CO5.3',], decreasing=T)[1:3]
+plot.mode('Chayahuita')
+plot.scenario.similarities(sim.new.wcs.match.imputated, '', '', '')
+unique(sim.modes.new$lang.name)
+head(sim.modes.new$lang.name)
+head(sim.modes.new)
+unique(row.names(sim.new.wcs.match.imputated))
+sim.modes.new <- read.simulation('spectrum-McGill-smoothing-10-5.csv',simplify.names=F)
+sim.modes.new <- read.simulation('results/new/spectrum-McGill-smoothing-10-5.csv',simplify.names=F)
+plot.mode('2014-04-03 18:30:08.859140', sim.modes.new)
+sort(sim.new.wcs.match.imputated['2014-04-03 18:30:08.859140',], decreasing=T)[1:3]
+plot.mode('Bauzi')
+sort(sim.wcs.match.imputated['RKK5.1',], decreasing=T)[1:3]
+sort(sim.wcs.match.imputated['RKK6.4',], decreasing=T)[1:3]
+sort(sim.wcs.match.imputated['CO6.4',], decreasing=T)[1:3]
+ks.test(sim.wcs.match.imputated['CO6.4',],wcs.wcs.match.imputated['Múra Pirahá',])
+ks.test(sim.wcs.match.imputated['CO6.4',],wcs.wcs.match.imputated['Zapotec',])
+cor.test(method='spearman',sim.wcs.match.imputated['CO6.4',],wcs.wcs.match.imputated['Zapotec',])
+sort(sim.wcs.match.imputated['RKK6.1',], decreasing=T)[1:3]
+ks.test(sim.wcs.match.imputated['RKK6.1',],wcs.wcs.match.imputated['Ocaina',])
+cor.test(method='spearman',sim.wcs.match.imputated['RKK6.1',],wcs.wcs.match.imputated['Ocaina',])
+plot.mode('Ocaina')
+sort(sim.wcs.match.imputated['CO4.5',], decreasing=T)[1:3]
+ks.test(sim.wcs.match.imputated['CO4.5',],wcs.wcs.match.imputated['Múra Pirahá',])
+cor.test(sim.wcs.match.imputated['CO4.5',],wcs.wcs.match.imputated['Múra Pirahá',])
+cor.test(method='spearman',sim.wcs.match.imputated['CO4.5',],wcs.wcs.match.imputated['Múra Pirahá',])
+cor.test(sim.wcs.match.imputated['CO4.10',],wcs.wcs.match.imputated['Múra Pirahá',])
+ks.test(sim.wcs.match.imputated['CO4.10',],wcs.wcs.match.imputated['Múra Pirahá',])
+cor.test(method='spearman',sim.wcs.match.imputated['CO4.10',],wcs.wcs.match.imputated['Múra Pirahá',])
+ks.test(sim.wcs.match.imputated['CO3.10',],wcs.wcs.match.imputated['Múra Pirahá',])
+boxplot(wcs.wcs.match.imputated['Múra Pirahá',],horiz=T)
+boxplot(wcs.wcs.match.imputated['Múra Pirahá',],horizontal=T)
+boxplot(wcs.wcs.match.imputated['Múra Pirahá',],horizontal=T,ylim=c(0,1))
+boxplot(sim.wcs.match.imputated['CO3.10',],horizontal=T,ylim=c(0,1))
+ks.test(sim.wcs.match.imputated['CO3.10',],wcs.wcs.match.imputated['Múra Pirahá',])
+ks.test(wcs.wcs.match.imputated['Múra Pirahá',],wcs.wcs.match.imputated['Múra Pirahá',])
+ks.test(sim.wcs.match.imputated['CO4.5',],wcs.wcs.match.imputated['Múra Pirahá',])
+boxplot(wcs.wcs.match.imputated['Múra Pirahá',],horizontal=T,ylim=c(0,1))
+boxplot(sim.wcs.match.imputated['CO4.5',],horizontal=T,ylim=c(0,1))
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+sample(1:3,330,replace=T)
+x <- sample(1:3,330,replace=T)
+nmis <- c()
+for (i in 1:10) { y <- sample(1:3,330,replace=T); nmis <- c(nmis, normalized.mutual.information(x,y))}
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+for (i in 1:10) { y <- sample(1:3,330,replace=T); nmis <- c(nmis, normalized.mutual.information(x,y))}
+nmis
+hist(nmis)
+for (i in 1:1000000) { y <- sample(1:3,330,replace=T); nmis <- c(nmis, normalized.mutual.information(x,y))}
+length(nmis)
+summary(nmis)
+hist nmis
+hist(nmis)
+x <- sample(1:30,330,replace=T)
+nmis <- c()
+for (i in 1:10000) { y <- sample(1:30,330,replace=T); nmis <- c(nmis, normalized.mutual.information(x,y))}
+hist(nmis)
+x <- sample(1:4,330,replace=T)
+nmis <- c()
+for (i in 1:100000) { y <- sample(1:4,330,replace=T); nmis <- c(nmis, normalized.mutual.information(x,y))}
+nmis <- c()
+for (i in 1:10000) { y <- sample(1:4,330,replace=T); nmis <- c(nmis, normalized.mutual.information(x,y))}
+hist(nmis)
+nmis <- list()
+for (n in 3:6) { print(n); x <- sample(1:n,330,replace=T); nmis[[n]] <- c(); for (i in 1:10000) { y <- sample(1:n,330,replace=T); nmis[[n]] <- c(nmis[[n]], normalized.mutual.information(x,y))}
+}
+cat(3)
+as.character(3)
+nmis <- list()
+for (n in 3:6) { print(n); x <- sample(1:n,330,replace=T); nmis[[as.character(n)]] <- c(); for (i in 1:10000) { y <- sample(1:n,330,replace=T); nmis[[as.character(n)]] <- c(nmis[[as.character(n)]], normalized.mutual.information(x,y))}}
+boxplot(nmis)
+boxplot(nmis, horiz=T)
+boxplot(nmis, horizontal==T)
+boxplot(nmis, horizontal=T)
+log((330+3*3-3-3)/329)
+log((330+4*4-4-4)/329)
+log((330+5*5-5-5)/329)
+log((330+6*6-6-6)/329)
+nnmis <- list()
+nnmis[['3']] <- nmis[['3']] / 0.01208474
+nnmis[['4']] <- nmis[['4']] / 0.02698814
+nnmis[['5']] <- nmis[['5']] / 0.04748667
+nnmis[['6']] <- nmis[['6']] / 0.07323916
+library(mclust)
+install.packages('mclust')
+library(mclust)
+aris <- list()
+for (n in 3:6) { print(n); x <- sample(1:n,330,replace=T); aris[[as.character(n)]] <- c(); for (i in 1:10000) { y <- sample(1:n,330,replace=T); aris[[as.character(n)]] <- c(aris[[as.character(n)]], adjustedRandIndex(x,y))}}
+boxplot(aris, horizontal=T)
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+amis <- list()
+for (n in 3:6) { print(n); x <- sample(1:n,330,replace=T); amis[[as.character(n)]] <- c(); for (i in 1:10000) { y <- sample(1:n,330,replace=T); amis[[as.character(n)]] <- c(amis[[as.character(n)]], normalized.mutual.information(x,y,adjusted=T))}}
+boxplot(amis, horizontal=T)
+tmp <- table(sample(1:4,330,replace=T),sample(1:5,330,replace=T))
+tmp
+?table
+tmp[,6]
+tmp[,5]
+sum(tmp)
+tmp[,6] <- 0
+?table
+class(tmp)
+unclass(tmp)
+class(unclass(tmp))
+unclass(unclass(tmp))
+class(unclass(unclass(tmp)))
+sapply(tmp, sum)
+names(tmp)
+nrow(tm)
+nrow(tmp)
+apply(tmp, 1, sum)
+apply(tmp, 2, sum)
+67!
+factorial(67)
+factorial(677)
+factorial(330)
+?factorial
+factorial(100)
+lfactorial(100)
+install.packages('gmp')
+library(gmp)
+install.packages('gmp')
+library(gmp)
+factorialZ(330)
+load("~/Documents/Scientific papers/color-categorization-games/.RData")
+adjustedRandIndex(get.mode('Nafaanra'), get.mode('Ejagam')
+)
+adjustedRandIndex(get.mode('Nafaanra'), get.mode('Ejagam'))
+get.mode('Nafaanra')
+adjustedRandIndex(get.mode('Nafaanra')$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('RKK3.1',sim.modes)$term, get.mode('Ejagam')$term)
+plot.mode('RKK3.1',sim.modes)
+plot.mode('Ejagam')
+table(get.mode('Nafaanra')$term, get.mode('Ejagam')$term)
+table(get.mode('RKK3.1',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.1',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.2',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.3',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.4',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.5',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.6',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.7',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.8',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.9',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.10',sim.modes)$term, get.mode('Ejagam')$term)
+?adjustedRandIndex
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+match.languages('Nafaanra','Ejagam')
+match.languages('Nafaanra','Ejagam',na.handling='imputate')
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+match.languages('Nafaanra','Ejagam',na.handling='imputate')
+sim.wcs.match.ari <- match.all.languages(sim.modes,wcs.modes)
+plot.scenario.similarities(sim.wcs.match.ari, 'CO',3)
+sort(sim.wcs.match.imputated['CO3.5',], decreasing=T)[1:3]
+adjustedRandIndex(get.mode('CO3.6',sim.modes)$term, get.mode('Ejagam')$term)
+adjustedRandIndex(get.mode('CO3.5',sim.modes)$term, get.mode('Ejagam')$term)
+match.languages('CO3.5','Ejagam',modes1=sim.modes,na.handling='imputate')
+match.languages('CO3.5','Ejagam',modes1=sim.modes,na.handling='imputate')
+match.languages('CO3.5','Ejagam',modes1=sim.modes,na.handling='imputate')
+match.languages('CO3.5','Ejagam',modes1=sim.modes,na.handling='imputate')
+match.languages('CO3.5','Ejagam',modes1=sim.modes,na.handling='imputate')
+match.languages('CO3.5','Ejagam',modes1=sim.modes,na.handling='imputate')
+match.languages('CO3.5','Ejagam',modes1=sim.modes,na.handling='none')
+match.languages('CO3.5','Ejagam',modes1=sim.modes,na.handling='none')
+plot.scenario.similarities(sim.wcs.match.ari, 'CO',4)
+plot.scenario.similarities(sim.wcs.match.ari, 'CO',5)
+plot.scenario.similarities(sim.wcs.match.ari, 'CO',6)
+plot.scenario.similarities(sim.wcs.match.ari, 'RKK','',additional.prefix='')
+plot.scenario.similarities(sim.wcs.match.imputated, 'RKK','',additional.prefix='')
+plot.scenario.similarities(sim.wcs.match.imputated, 'RKK','')
+plot.scenario.similarities(sim.wcs.match.ari, 'RKK','')
+plot.scenario.similarities(wcs.wcs.match, '','')
+plot.scenario.similarities(wcs.wcs.match.imputated, '','')
+wcs.wcs.match.ari <- match.all.languages(wcs.modes,wcs.modes)
+plot.scenario.similarities(wcs.wcs.match.ari, '','')
+names(nterms)
+nterms[nterms$x==3,]
+nterms[nterms$x==3,1]
+cat(nterms[nterms$x==3,1])
+cat(nterms[nterms$x==3,1],sep='|')
+plot.scenario.similarities(wcs.wcs.match.ari, cat(nterms[nterms$x==3,1],sep='|'),'')
+plot.scenario.similarities(wcs.wcs.match.ari, paste(nterms[nterms$x==3,1],sep='|'),'')
+paste(nterms[nterms$x==3,1],sep='|')
+?paste
+paste(nterms[nterms$x==3,1])
+do.call(paste, nterms[nterms$x==3,1])
+do.call(paste, list(nterms[nterms$x==3,1]))
+do.call(paste, list(...=nterms[nterms$x==3,1]))
+do.call(paste, as.list(nterms[nterms$x==3,1]))
+do.call(paste, list(sep='|',as.list(nterms[nterms$x==3,1])))
+do.call(paste, c(list(sep='|'),as.list(nterms[nterms$x==3,1])))
+plot.scenario.similarities(wcs.wcs.match.ari, do.call(paste, c(list(sep='|'),as.list(nterms[nterms$x==3,1]))),'')
+sort(wcs.wcs.match.ari['Bété',], decreasing=T)[1:5]
+sort(wcs.wcs.match.ari['Bété',], decreasing=T)[1:9]
+sort(wcs.wcs.match.ari['Bété',], decreasing=T)[1:8]
+plot.mode('Konkomba')
+quantile(wcs.wcs.match.ari['Bété',], probs=0:100/100)
+quantile(wcs.wcs.match.ari['Yacouba',], probs=0:100/100)
+quantile(wcs.wcs.match.ari['Nafaanra',], probs=0:100/100)
+plot.scenario.similarities(wcs.wcs.match.ari, do.call(paste, c(list(sep='|'),as.list(nterms[nterms$x==4,1]))),'')
+plot.scenario.similarities(wcs.wcs.match.ari, do.call(paste, c(list(sep='|'),as.list(nterms[nterms$x==5,1]))),'')
+plot.scenario.similarities(wcs.wcs.match.ari, do.call(paste, c(list(sep='|'),as.list(nterms[nterms$x==6,1]))),'')
+apply(tmp, 1, sum)
+tmp
+tmp <- table(sample(1:4,330,replace=T),sample(1:5,330,replace=T))
+apply(tmp, 1, sum)
+tmp
+?a
+?b
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T))
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+expected
+(nij/n)
+(log(n * nij/(a[i] * b[j])))
+(nij/n) * (log(n * nij/(a[i] * b[j])))
+factorialZ(a[i])
+factorialZ(a[i]) * factorialZ(b[j]) * factorialZ(n - a[i]) *
+factorialZ(n - b[j])
+factorialZ(n) * factorialZ(nij) *
+factorialZ(a[i] - nij) * factorialZ(b[j] - nij) * factorialZ(n -
+a[i] - b[j] + nij)
+(factorialZ(a[i]) * factorialZ(b[j]) * factorialZ(n - a[i]) *
+factorialZ(n - b[j]))/(factorialZ(n) * factorialZ(nij) *
+factorialZ(a[i] - nij) * factorialZ(b[j] - nij) * factorialZ(n -
+a[i] - b[j] + nij))
+it * (nij/n) * (log(n * nij/(a[i] * b[j])))
+(nij/n) * (log(n * nij/(a[i] * b[j]))) *
+(factorialZ(a[i]) * factorialZ(b[j]) * factorialZ(n - a[i]) *
+factorialZ(n - b[j]))/(factorialZ(n) * factorialZ(nij) *
+factorialZ(a[i] - nij) * factorialZ(b[j] - nij) * factorialZ(n -
+a[i] - b[j] + nij))
+0 + (nij/n) * (log(n * nij/(a[i] * b[j]))) *
+(factorialZ(a[i]) * factorialZ(b[j]) * factorialZ(n - a[i]) *
+factorialZ(n - b[j]))/(factorialZ(n) * factorialZ(nij) *
+factorialZ(a[i] - nij) * factorialZ(b[j] - nij) * factorialZ(n -
+a[i] - b[j] + nij))
+(factorialZ(a[i]) * factorialZ(b[j]) * factorialZ(n - a[i]) *
+factorialZ(n - b[j]))/(factorialZ(n) * factorialZ(nij) *
+factorialZ(a[i] - nij) * factorialZ(b[j] - nij) * factorialZ(n -
+a[i] - b[j] + nij)) * 0.009
+(factorialZ(a[i]) * factorialZ(b[j]) * factorialZ(n - a[i]) *
+factorialZ(n - b[j]))/(factorialZ(n) * factorialZ(nij) *
+factorialZ(a[i] - nij) * factorialZ(b[j] - nij) * factorialZ(n -
+a[i] - b[j] + nij)) * -0.009
+?log
+log(330*19)
+log(330*19/(10*12))
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+a
+a[i]
+a[,i]
+a[[i]]
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+expected
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+expected
+(nij/n) * (log(n*nij/(a[[i]]*b[[j]])))
+(factorialZ(a[[i]]) * factorialZ(b[[j]]) * factorialZ(n-a[[i]]) * factorialZ(n-b[[j]])) /
+(factorialZ(n) * factorialZ(nij) * factorialZ(a[[i]]-nij) * factorialZ(b[[j]]-nij) * factorialZ(n-a[[i]]-b[[j]]+nij))
+0.28 * (factorialZ(a[[i]]) * factorialZ(b[[j]]) * factorialZ(n-a[[i]]) * factorialZ(n-b[[j]])) /
+(factorialZ(n) * factorialZ(nij) * factorialZ(a[[i]]-nij) * factorialZ(b[[j]]-nij) * factorialZ(n-a[[i]]-b[[j]]+nij))
+?gmp
+?factorialZ
+library(mclust)
+adjustedRandIndex
+adjustedRandIndex
+?choose
+?rowSums
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+q
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T)
+?gmp
+??gmp
+as.numeric(normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T))
+as.numeric(normalized.mutual.information(sample(1:4,330,replace=T),sample(1:4,330,replace=T),adjusted=T))
+as.numeric(normalized.mutual.information(get.mode('Nafaanra')$term,get.mode('Ejagam')$term,adjusted=T))
+load("~/Documents/Scientific papers/color-categorization-games/.RData")
+as.numeric(normalized.mutual.information(get.mode('Nafaanra')$term,get.mode('Ejagam')$term,adjusted=T))
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+as.numeric(normalized.mutual.information(get.mode('Nafaanra')$term,get.mode('Ejagam')$term,adjusted=T))
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+as.numeric(normalized.mutual.information(get.mode('Nafaanra')$term,get.mode('Ejagam')$term,adjusted=T))
+ct
+a
+b
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+as.numeric(normalized.mutual.information(get.mode('Nafaanra')$term,get.mode('Ejagam')$term,adjusted=T))
+?unique
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+normalized.mutual.information(get.mode('Nafaanra')$term,get.mode('Ejagam')$term,adjusted=T)
+normalized.mutual.information(get.mode('Nafaanra')$term,get.mode('Ejagam')$term,adjusted=F)
+amis <- list()
+for (n in 3:6) { print(n); x <- sample(1:n,330,replace=T); amis[[as.character(n)]] <- c(); for (i in 1:10000) { y <- sample(1:n,330,replace=T); amis[[as.character(n)]] <- c(amis[[as.character(n)]], normalized.mutual.information(x,y,adjusted=T))}}
+amis <- list()
+for (n in 3:6) { print(n); x <- sample(1:n,330,replace=T); amis[[as.character(n)]] <- c(); for (i in 1:100) { y <- sample(1:n,330,replace=T); amis[[as.character(n)]] <- c(amis[[as.character(n)]], normalized.mutual.information(x,y,adjusted=T))}}
+boxplot(amis, horizontal=T)
+boxplot(aris, horizontal=T)
+boxplot(nmis, horizontal=T)
+amis <- list()
+for (n in 3:6) { print(n); x <- sample(1:n,330,replace=T); amis[[as.character(n)]] <- c(); for (i in 1:1000) { y <- sample(1:n,330,replace=T); amis[[as.character(n)]] <- c(amis[[as.character(n)]], normalized.mutual.information(x,y,adjusted=T))}}
+boxplot(amis, horizontal=T)
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+match.languages('Nafaanra','Ejagam')
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+match.languages('Nafaanra','Ejagam')
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+match.languages('Nafaanra','Ejagam')
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+match.languages('Nafaanra','Ejagam')
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+match.languages('Nafaanra','Ejagam')
+debugSource('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+match.languages('Nafaanra','Ejagam')
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+match.languages('Nafaanra','Ejagam')
+match.languages('Nafaanra','Ejagam', metric='NMI', na.imputate=FALSE)
+match.languages('Nafaanra','Ejagam', metric='NMI', na.imputate=TRUE)
+match.languages('Nafaanra','Ejagam', metric='AMI', na.imputate=FALSE)
+match.languages('Nafaanra','Ejagam', metric='AMI', na.imputate=TRUE)
+match.languages('Nafaanra','Ejagam', metric='ARI', na.imputate=FALSE)
+match.languages('Nafaanra','Ejagam', metric='ARI', na.imputate=TRUE)
+plot.all.modes(c('Nafaanra','Ejagam'))
+match.languages('Nafaanra','Ejagam', metric='ARI', na.imputate=FALSE)
+match.languages('Nafaanra','Tifal', metric='ARI', na.imputate=FALSE)
+match.languages('Nafaanra','Tifal', metric='ARI', na.imputate=TRUE)
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+source('~/color-categorization-games/data-analysis.R')
+source('~/color-categorization-games/data-analysis.R')
+source('~/color-categorization-games/data-analysis.R')
+save.image("~/Documents/Scientific papers/color-categorization-games/.RData-2014-05-29.RData")
+for (prefix in c('COM-','Spec-','SpecMcGill-','SpecMcGillSmoothed')) {
+for (t in 3:6) {
+ggsave(paste(sep='', prefix, t, '.png'), plot.scenario.similarities(sim.wcs.match.ari, prefix, t, additional.prefix='RKK-'))
+}
+}
+wcs.wcs.match.ari <- match.all.languages(wcs.modes, wcs.modes, metric='ARI', na.imputate=TRUE)
+cat("Matching simulation results with WCS languages (may take a while)...\n")
+sim.wcs.match.ari <- match.all.languages.m(sim.modes, wcs.modes, metric='ARI', na.imputate=TRUE)
+for (prefix in c('COM-','Spec-','SpecMcGill-','SpecMcGillSmoothed')) {
+for (t in 3:6) {
+ggsave(paste(sep='', prefix, t, '.png'), plot.scenario.similarities(sim.wcs.match.ari, prefix, t, additional.prefix='RKK-'))
+}
+}
+cat("Matching simulation results with WCS languages (may take a while)...\n")
+sim.wcs.match.ari <- match.all.languages(sim.modes, wcs.modes, metric='ARI', na.imputate=TRUE)
+for (prefix in c('COM-','Spec-','SpecMcGill-','SpecMcGillSmoothed')) {
+for (t in 3:6) {
+ggsave(paste(sep='', prefix, t, '.png'), plot.scenario.similarities(sim.wcs.match.ari, prefix, t, additional.prefix='RKK-'))
+}
+}
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+cat("Matching simulation results with WCS languages (may take a while)...\n")
+sim.wcs.match.ari <- match.all.languages(sim.modes, wcs.modes, metric='ARI', na.imputate=TRUE)
+for (prefix in c('COM-','Spec-','SpecMcGill-','SpecMcGillSmoothed')) {
+for (t in 3:6) {
+ggsave(paste(sep='', prefix, t, '.png'), plot.scenario.similarities(sim.wcs.match.ari, prefix, t, additional.prefix='RKK-'))
+}
+}
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+plot.scenario.similarities(wcs.wcs.match.ari, do.call(paste, c(list(sep='|'),as.list(nterms[nterms$x==5,1]))),'')
+plot.scenario.similarities(sim.wcs.match.imputated, 'RKK', '', 'XXX')
+plot.scenario.similarities(sim.wcs.match.ari, 'CO',6)
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+plot.scenario.similarities(sim.wcs.match.ari, 'CO',6)
+?xlim
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+plot.scenario.similarities(sim.wcs.match.ari, 'COM-',6)
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+for (prefix in c('COM-','Spec-','SpecMcGill-','SpecMcGillSmoothed-')) {
+for (t in 3:6) {
+ggsave(paste(sep='', prefix, t, '.png'), plot.scenario.similarities(sim.wcs.match.ari, prefix, t, additional.prefix='RKK-'))
+}
+}
+source('~/Documents/Scientific papers/color-categorization-games/data-analysis-functions.R')
+for (prefix in c('COM-','Spec-','SpecMcGill-','SpecMcGillSmoothed-')) {
+for (t in 3:6) {
+ggsave(paste(sep='', prefix, t, '.png'), plot.scenario.similarities(sim.wcs.match.ari, prefix, t, additional.prefix='RKK-') + ylim(-0.05,0.5))
+}
+}
+wcs.wcs.match.ari <- match.all.languages(wcs.modes, wcs.modes, metric='ARI', na.imputate=TRUE)
+plot.scenario.similarities(wcs.wcs.match.ari, '','','XXX')
+diag(wcs.wcs.match.ari)
+savehistory("~/Documents/Scientific papers/color-categorization-games/.RData-2014-05-29.RData")
