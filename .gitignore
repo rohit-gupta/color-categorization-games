@@ -7,3 +7,5 @@ data/McGill-natural-scenes-database
 .pydevproject
 tmp
 .Rproj.user
+color-categorization-games.Rproj
+*~
