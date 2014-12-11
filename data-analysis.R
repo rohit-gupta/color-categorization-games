@@ -2,48 +2,14 @@ library(ggplot2)
 
 source('data-analysis-functions.R')
 
-read.wcs <- function() {
-  agreement.level <<- 0.5
-  
-  cat("Reading data from WCS files...\n")
-  wcs.chip <<- read.table("WCS-Data-20110316/chip.txt", stringsAsFactors=FALSE, sep="\t", na.strings="",
-                  col.names=c("wcs.index","wcs.value","wcs.hue","wcs.valuehue"))
-                      
-  wcs.lang <<- read.table("WCS-Data-20110316/lang.txt", stringsAsFactors=FALSE, sep="\t", na.strings="")
-  colnames(wcs.lang)[1:4] <<- c("wcs.index","name","location","field.worker")
-  
-  wcs.selection <<- read.table('data/WCS_pruned.tsv', sep='\t', col.names=c("wcs.lang.index","wcs.lang.name","include","comment"))
-  
-  wcs <<- read.table("WCS-Data-20110316/term.txt", stringsAsFactors=FALSE, sep="\t", na.strings="",
-             col.names=c("wcs.lang.index","speaker.index", "wcs.chip.index","term"))
-             
-  cat("Read", nrow(wcs), "datapoints.\n")
-  
-  cat("Excluding data for", length(which(wcs.selection$include==0)), "languages...\n")
-  wcs <<- wcs[wcs$wcs.lang.index %in% wcs.selection$wcs.lang.index[wcs.selection$include == 1],]
-             
-  cat("Marking dubious data points (\"?\" and \"*\") as <NA>...\n")
-  wcs$term[wcs$term == "?"] <<- NA
-  wcs$term[wcs$term == "*"] <<- NA
-  
-  cat("Calculating mode map for each language (may take a while)...\n")
-  wcs.modes <<- aggregate(wcs$term, by=list(wcs$wcs.chip.index, wcs$wcs.lang.index),
-                         FUN=function(x) { agreement(x, min.level=agreement.level) }) 
-  colnames(wcs.modes) <<- c("wcs.chip.index", "wcs.lang.index", "term")
-  
-  wcs.modes$wcs.hue <<- wcs.chip$wcs.hue[wcs.modes$wcs.chip.index]
-  wcs.modes$wcs.value <<- wcs.chip$wcs.value[wcs.modes$wcs.chip.index]
-  wcs.modes$lang.name <<- wcs.lang$name[wcs.modes$wcs.lang.index]
-  
-  wcs.modes$wcs.hue <<- factor(as.numeric(wcs.modes$wcs.hue))
-  wcs.modes$wcs.value <<- factor(wcs.modes$wcs.value, levels=c("J","I","H","G","F","E","D","C","B","A"))
-  
+match.wcs.languages <- function() {
   cat("Matching WCS languages with WCS languages (may take a while)...\n")
   wcs.wcs.match.ari <<- match.all.languages(wcs.modes, wcs.modes, metric='ARI', na.imputate=TRUE)
   wcs.wcs.match.ari.rounded <<- round(wcs.wcs.match.ari, digits=2)
   wcs.wcs.match.ari.rounded.no.diag <<- wcs.wcs.match.ari.rounded
   diag(wcs.wcs.match.ari.rounded.no.diag) <<- NA
   wcs.wcs.match.ari.rounded.quantiles <<- quantile(wcs.wcs.match.ari.rounded[upper.tri(wcs.wcs.match.ari.rounded)], probs=0:100/100)
+  
 }
 
 read.simulations <- function() {
