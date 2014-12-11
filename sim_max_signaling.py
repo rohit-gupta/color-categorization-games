@@ -148,7 +148,7 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
             print 'Converged!\a'
             break
     
-#    plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
+    plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
     
     MunsellModeMap = speaker_mode_map(PerceptualSpace, Speakers, MunsellPalette, Sim2)
     
@@ -173,17 +173,17 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
 
 if __name__ == "__main__":
     if len(sys.argv) < 6:
-        print "Usage: python", sys.argv[0], "<perceptual space filename> <priors column number (0+)> <number of messages> <maximum number of generations> <output filename> <measurements filename>"
+        print "Usage: python", sys.argv[0], "<perceptual space filename> <priors filename> <number of messages> <maximum number of generations> <output filename> <measurements filename>"
         sys.exit(1)
     else:
         PerceptualSpaceFilename = sys.argv[1]
-        PriorsColumn = int(sys.argv[2])
+        PriorsFilename = sys.argv[2]
         NForms = int(sys.argv[3])
         NGenerations = int(sys.argv[4])
         output_filename = sys.argv[5]
         measurements_filename = sys.argv[6]
 
-        PerceptualSpace = read_csv_file(PerceptualSpaceFilename, [0, 1, 2])
-        PMeaning = read_csv_file(PerceptualSpaceFilename, [PriorsColumn])[:,0]
+        PerceptualSpace = read_csv_file(PerceptualSpaceFilename, [2, 0, 1])
+        PMeaning = read_csv_file(PriorsFilename, [0])[:,0]
         
         run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filename, measurements_filename)
