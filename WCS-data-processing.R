@@ -59,5 +59,5 @@ wcs.modes$wcs.hue <- factor(as.numeric(wcs.modes$wcs.hue))
 wcs.modes$wcs.value <- factor(wcs.modes$wcs.value, levels=c("J","I","H","G","F","E","D","C","B","A"))
 
 cat("Writing results to file", output.filename, "\n")
-write.csv(wcs.modes[c('lang.name','wcs.hue','wcs.value','term')],
-          file=output.filename, row.names=FALSE)
+write.table(wcs.modes[c('lang.name','wcs.hue','wcs.value','term')], sep=',',
+          file=output.filename, row.names=FALSE, col.names=FALSE)
