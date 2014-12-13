@@ -22,14 +22,14 @@ agreement <- function(x, min.level) {
   }
 }
 
-read.simulation <- function(filename, simplify.names=TRUE, names.prefix='') {
+read.simulation <- function(filename, names.rewrite.prefix=NA) {
   tmp <- read.csv(filename, header=FALSE, stringsAsFactors=FALSE,
                   col.names=c("lang.name","wcs.hue","wcs.value","term"))
   tmp$wcs.hue <- factor(as.numeric(tmp$wcs.hue))
   tmp$wcs.value <- factor(tmp$wcs.value, levels=c("J","I","H","G","F","E","D","C","B","A"))
   
-  if (simplify.names) {
-    tmp$lang.name <- paste(sep='', names.prefix, as.character(as.numeric(factor(tmp$lang.name))))
+  if (!is.na(names.rewrite.prefix)) {
+    tmp$lang.name <- paste(sep='', names.rewrite.prefix, as.character(as.numeric(factor(tmp$lang.name))))
   }
   
   return(tmp)
