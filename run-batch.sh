@@ -13,7 +13,6 @@ do
         do
             echo "  $n"
             python sim_max_signaling.py "data/$spectrum.csv" "data/$spectrum-priors-10.csv" $t 99999999999 $results_file $measurements_file
-            exit 1
         done
     done
 done
