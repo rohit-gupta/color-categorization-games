@@ -7,6 +7,7 @@ from tkSimpleDialog import *
 
 import matplotlib.pyplot as plt
 from joblib import Memory
+from mpl_toolkits.mplot3d import Axes3D
 
 
 memory = Memory(cachedir='tmp', verbose=0)
@@ -115,7 +116,7 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
         PerceptualModeMap = speaker_mode_map(PerceptualSpace, Speakers)
         MunsellModeMap = speaker_mode_map(PerceptualSpace, Speakers, MunsellPalette, Sim2)
 
-        plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap)
+        # plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap)
 
         SpeakersBefore = copy.deepcopy(Speakers)
         HearersBefore = copy.deepcopy(Hearers)
@@ -150,7 +151,7 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
             print 'Converged!\a'
             break
 
-    plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
+    # plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
 
     MunsellModeMap = speaker_mode_map(PerceptualSpace, Speakers, MunsellPalette, Sim2)
 
@@ -177,7 +178,7 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 6:
+    if len(sys.argv) != 7:
         print "Usage: python", sys.argv[0],\
             "<perceptual space filename>",\
             "<priors filename>",\
