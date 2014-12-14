@@ -29,7 +29,12 @@ read.simulation <- function(filename, names.rewrite.prefix=NA) {
   tmp$wcs.value <- factor(tmp$wcs.value, levels=c("J","I","H","G","F","E","D","C","B","A"))
   
   if (!is.na(names.rewrite.prefix)) {
-    tmp$lang.name <- paste(sep='', names.rewrite.prefix, as.character(as.numeric(factor(tmp$lang.name))))
+    lang.names <- factor(tmp$lang.name)
+    if (length(unique(lang.names)) > 1) {
+        tmp$lang.name <- paste(sep='', names.rewrite.prefix, as.character(as.numeric(lang.names)))
+    } else {
+        tmp$lang.name <- names.rewrite.prefix
+    }
   }
   
   return(tmp)
