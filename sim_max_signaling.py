@@ -1,16 +1,11 @@
 import copy
 import csv
 from datetime import datetime
-import sys
-import math
-
 import numpy as np
 from numpy import random as random
-from Tkinter import *
 from tkSimpleDialog import *
+
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-from reportlab.pdfbase import cidfonts
 from joblib import Memory
 
 
@@ -50,8 +45,7 @@ def similarity(x1, x2):
 
 @memory.cache
 def similarity_matrix(Lab1, Lab2):
-    print
-    'Calculating similarity matrix of size ' + str(len(Lab1)) + 'x' + str(len(Lab2)) + ' (can take a while)...'
+    print 'Calculating similarity matrix of size', str(len(Lab1)) + 'x' + str(len(Lab2)), '(can take a while)...'
     Sim = np.zeros((len(Lab1), len(Lab2)))
     for x1 in xrange(len(Lab1)):
         for x2 in xrange(len(Lab2)):
@@ -116,8 +110,7 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
 
     for g in xrange(NGenerations):
 
-        print
-        'Generation: ', str(g)
+        print 'Generation:', str(g)
 
         PerceptualModeMap = speaker_mode_map(PerceptualSpace, Speakers)
         MunsellModeMap = speaker_mode_map(PerceptualSpace, Speakers, MunsellPalette, Sim2)
@@ -154,8 +147,7 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
             Hearers[i] /= np.sum(Hearers[i])
 
         if np.sum(abs(Speakers - SpeakersBefore)) < 0.01 and np.sum(abs(Hearers - HearersBefore)) < 0.01:
-            print
-            'Converged!\a'
+            print 'Converged!\a'
             break
 
     plot(PerceptualSpace, PMeaning, MunsellPalette, PerceptualModeMap, MunsellModeMap, block=True)
@@ -185,10 +177,14 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 6:
-        print
-        "Usage: python", sys.argv[
-            0], "<perceptual space filename> <priors filename> <number of messages> <maximum number of generations> <output filename> <measurements filename>"
+    if len(sys.argv) != 6:
+        print "Usage: python", sys.argv[0],\
+            "<perceptual space filename>",\
+            "<priors filename>",\
+            "<number of messages>",\
+            "<maximum number of generations>",\
+            "<output filename>",\
+            "<measurements filename>"
         sys.exit(1)
     else:
         PerceptualSpaceFilename = sys.argv[1]
