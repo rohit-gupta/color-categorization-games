@@ -2,114 +2,52 @@ library(ggplot2)
 
 source('data-analysis-functions.R')
 
-match.wcs.languages <- function() {
-  cat("Matching WCS languages with WCS languages (may take a while)...\n")
-  wcs.wcs.match.ari <<- match.all.languages(wcs.modes, wcs.modes, metric='ARI', na.imputate=TRUE)
-  wcs.wcs.match.ari.rounded <<- round(wcs.wcs.match.ari, digits=2)
-  wcs.wcs.match.ari.rounded.no.diag <<- wcs.wcs.match.ari.rounded
-  diag(wcs.wcs.match.ari.rounded.no.diag) <<- NA
-  wcs.wcs.match.ari.rounded.quantiles <<- quantile(wcs.wcs.match.ari.rounded[upper.tri(wcs.wcs.match.ari.rounded)], probs=0:100/100)
-  
-}
+nterms <- 3
 
-read.simulations <- function() {
-  cat("Reading all simulation results...\n")
-  sim.modes <<- data.frame()
-  sim.modes <<- rbind(sim.modes, read.simulation("results/Regier3.csv", names.rewrite.prefix='RKK-3.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/Regier4.csv", names.rewrite.prefix='RKK-4.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/Regier5.csv", names.rewrite.prefix='RKK-5.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/Regier6.csv", names.rewrite.prefix='RKK-6.'))
+digits.rounding <- 3
+match.files <- c(paste(sep='-', 'results/Munsell', nterms, 'WCS.csv'),
+                 paste(sep='-', 'results/spectrum-10-CIELAB-Daylight-6500K-flat', nterms, 'WCS.csv'),
+                 paste(sep='-', 'results/spectrum-10-CIELAB-Daylight-6500K', nterms, 'WCS.csv'))
+rkk.match.file <- paste(sep='', 'results/Regier', nterms, '-WCS.csv')
 
-  sim.modes <<- rbind(sim.modes, read.simulation("results/Regier2014-3.csv", names.rewrite.prefix='RKeK-3.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/Regier2014-4.csv", names.rewrite.prefix='RKeK-4.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/Regier2014-5.csv", names.rewrite.prefix='RKeK-5.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/Regier2014-6.csv", names.rewrite.prefix='RKeK-6.'))
-  
-  sim.modes <<- rbind(sim.modes, read.simulation("results/simulations-3.csv", names.rewrite.prefix='COM-3.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/simulations-4.csv", names.rewrite.prefix='COM-4.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/simulations-5.csv", names.rewrite.prefix='COM-5.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/simulations-6.csv", names.rewrite.prefix='COM-6.'))
-  
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-flat-priors-3.csv", names.rewrite.prefix='Spec-3.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-flat-priors-4.csv", names.rewrite.prefix='Spec-4.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-flat-priors-5.csv", names.rewrite.prefix='Spec-5.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-flat-priors-6.csv", names.rewrite.prefix='Spec-6.'))
-  
-#   sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-McGill-no-smoothing-3.csv", names.rewrite.prefix='SpecMcGill-3.'))
-#   sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-McGill-no-smoothing-4.csv", names.rewrite.prefix='SpecMcGill-4.'))
-#   sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-McGill-no-smoothing-5.csv", names.rewrite.prefix='SpecMcGill-5.'))
-#   sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-McGill-no-smoothing-6.csv", names.rewrite.prefix='SpecMcGill-6.'))
-  
-#   sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-McGill-some-smoothing-3.csv", names.rewrite.prefix='SpecMcGillSmoothed-3.'))
-#   sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-McGill-some-smoothing-4.csv", names.rewrite.prefix='SpecMcGillSmoothed-4.'))
-#   sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-McGill-some-smoothing-5.csv", names.rewrite.prefix='SpecMcGillSmoothed-5.'))
-#   sim.modes <<- rbind(sim.modes, read.simulation("results/new-simulations-McGill-some-smoothing-6.csv", names.rewrite.prefix='SpecMcGillSmoothed-6.'))
-
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/Munsell-3.csv", names.rewrite.prefix='newCOM-3.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/Munsell-4.csv", names.rewrite.prefix='newCOM-4.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/Munsell-5.csv", names.rewrite.prefix='newCOM-5.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/Munsell-6.csv", names.rewrite.prefix='newCOM-6.'))
-  
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/spectrum-flat-3.csv", names.rewrite.prefix='newSpec-3.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/spectrum-flat-4.csv", names.rewrite.prefix='newSpec-4.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/spectrum-flat-5.csv", names.rewrite.prefix='newSpec-5.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/spectrum-flat-6.csv", names.rewrite.prefix='newSpec-6.'))
-  
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/spectrum-McGill-smoothing-10-3.csv", names.rewrite.prefix='newSpecMcGillSmoothed-3.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/spectrum-McGill-smoothing-10-4.csv", names.rewrite.prefix='newSpecMcGillSmoothed-4.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/spectrum-McGill-smoothing-10-5.csv", names.rewrite.prefix='newSpecMcGillSmoothed-5.'))
-  sim.modes <<- rbind(sim.modes, read.simulation("results/new/spectrum-McGill-smoothing-10-6.csv", names.rewrite.prefix='newSpecMcGillSmoothed-6.'))
-
-}
-
-process.simulations <- function() {
-  cat("Matching simulation results with WCS languages (may take a while)...\n")
-  sim.wcs.match.ari <<- match.all.languages(sim.modes, wcs.modes, metric='ARI', na.imputate=TRUE)
-  sim.wcs.match.ari.rounded <<- round(sim.wcs.match.ari, digits=2)
-}
-
-width <- 8
-height <- 5
-
-generate.distribution.plots <- function() {
-  rng <- extendrange(sim.wcs.match.ari.rounded)
-  ggsave('RKK-results-similarities.png', width=width, height=height, 
-         plot.scenario.similarities(sim.wcs.match.ari.rounded, 'RKK', '', additional.prefix='RKK-') + ylim(rng) +
-          geom_hline(yintercept=wcs.wcs.match.ari.rounded.quantiles[76], colour='yellow') +
-          geom_hline(yintercept=wcs.wcs.match.ari.rounded.quantiles[81], colour='orange') +
-          geom_hline(yintercept=wcs.wcs.match.ari.rounded.quantiles[86], colour='red') +
-          geom_hline(yintercept=wcs.wcs.match.ari.rounded.quantiles[91], colour='black')
-  )
-  for (prefix in c('COM-','Spec-','SpecMcGill-','SpecMcGillSmoothed-')) {
-    for (t in 3:6) {
-      ggsave(paste(sep='', prefix, t, '-results-similarities.png'), width=width, height=height,
-             plot.scenario.similarities(sim.wcs.match.ari.rounded, prefix, t, additional.prefix='RKK-') + ylim(rng) +
-               geom_hline(yintercept=wcs.wcs.match.ari.rounded.quantiles[76], colour='yellow') +
-               geom_hline(yintercept=wcs.wcs.match.ari.rounded.quantiles[81], colour='orange') +
-               geom_hline(yintercept=wcs.wcs.match.ari.rounded.quantiles[86], colour='red') +
-               geom_hline(yintercept=wcs.wcs.match.ari.rounded.quantiles[91], colour='black')
-      )
-    }
+max.similarities <- data.frame(lang.name=character(), 
+                               model.name=character(), 
+                               max.name=character(),
+                               max.value=numeric())
+for (match.file in match.files) {
+  match <- read.csv(match.file, row.names=1)
+  max.cols <- max.col(match, ties.method='first')
+  for (row in 1:nrow(match)) {
+    lang.name <- row.names(match)[row]
+    model.name <- strsplit(lang.name, '-')[[1]][1]
+    max.name <- colnames(match)[max.cols[row]]
+    max.value <- round(match[row, max.cols[row]], digits=digits.rounding)
+    max.similarities <- rbind(max.similarities,
+                              data.frame(lang.name, model.name, max.name, max.value))
   }
-  #ggplot(rbind(m1, m2[grep('RKK-', m2$Var2),]), aes(Var1,value, color=origin)) + geom_point() + coord_flip()
 }
 
-generate.rkk.plots <- function() {
-  rng <- extendrange(wcs.wcs.match.ari.rounded.no.diag)
-  ggsave('RKK-3-similarity-in-context.png', width=width, height=height, 
-         plot.sim.in.context(wcs.wcs.match.ari.rounded.no.diag, c('Wobé','Ejagam','Bauzi','Bété'),
-                             sim.wcs.match.ari.rounded, 'RKK-3.1') + ylim(rng)
-  )
-  ggsave('RKK-4-similarity-in-context.png', width=width, height=height, 
-         plot.sim.in.context(wcs.wcs.match.ari.rounded.no.diag, c('Wobé','Colorado','Bauzi','Culina'),
-                             sim.wcs.match.ari.rounded, 'RKK-4.1') + ylim(rng)
-  )
-  ggsave('RKK-5-similarity-in-context.png', width=width, height=height, 
-         plot.sim.in.context(wcs.wcs.match.ari.rounded.no.diag, c('Bauzi','Colorado','Múra Pirahá','Iduna','Cayapa'),
-                             sim.wcs.match.ari.rounded, 'RKK-5.1') + ylim(rng)
-  )
-  ggsave('RKK-6-similarity-in-context.png', width=width, height=height, 
-         plot.sim.in.context(wcs.wcs.match.ari.rounded.no.diag, c('Bauzi','Colorado','Ocaina','Cofán','Buglere'),
-                             sim.wcs.match.ari.rounded, 'RKK-6.1') + ylim(rng)
-  )
-}
+rkk.match <- read.csv(rkk.match.file, row.names=1)
+rkk.max.cols <- max.col(rkk.match, ties.method='first')
+rkk.max.value <- round(rkk.match[1, rkk.max.cols[1]], digits=digits.rounding)
+
+theme_set(theme_minimal())
+
+# ggplot(max.similarities, aes(x=max.value)) + geom_bar(position='dodge',aes(fill=model.name)) + geom_density(aes(linetype=model.name)) + scale_fill_grey(start = 0, end = .8)
+print(ggplot(max.similarities, aes(x=max.value)) + 
+        geom_bar() + geom_density() + facet_grid(model.name ~ .) +
+        geom_vline(xintercept=rkk.max.value, linetype='longdash') +
+        theme(axis.title.x = element_blank()) +
+        theme(axis.title.y = element_blank()) +
+        labs(title=paste(nterms, 'terms')))
+#ggplot(max.similarities, aes(x=model.name, y=max.value)) + geom_boxplot() + coord_flip()
+
+print(wilcox.test(subset(max.similarities, model.name == 'COM1')$max.value,
+                  subset(max.similarities, model.name == 'COM2')$max.value,
+                  paired=FALSE, conf.int=TRUE, exact=FALSE))
+print(wilcox.test(subset(max.similarities, model.name == 'COM1')$max.value,
+                  subset(max.similarities, model.name == 'COM3')$max.value,
+                  paired=FALSE, conf.int=TRUE, exact=FALSE))
+print(wilcox.test(subset(max.similarities, model.name == 'COM2')$max.value,
+                  subset(max.similarities, model.name == 'COM3')$max.value,
+                  paired=FALSE, conf.int=TRUE, exact=FALSE))
