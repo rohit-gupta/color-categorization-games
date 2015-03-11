@@ -64,7 +64,7 @@ def speaker_mode_map(Lab1, Strategy, Lab2=None, Similarity12=None):
             y = x
         else:
             y = np.argmax(Similarity12[x])
-        ModeMap[x] = np.argmax(Strategy[y])
+        ModeMap[x] = -1 if np.max(Strategy[y]) < 0.50 else np.argmax(Strategy[y])
     return (ModeMap)
 
 
@@ -72,7 +72,13 @@ def plot(PerceptualSpace, Priors, MunsellPalette, PerceptualModeMap, MunsellMode
     plt.clf()
     #    fig = plt.figure()
     ax1 = plt.subplot(2, 2, 1, projection='3d')
-    ax1.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=Priors)
+    ax1.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=1-Priors, cmap='gray')
+    ax1.set_xlabel('a')
+    ax1.set_ylabel('b')
+    ax1.set_zlabel('L')
+    ax1.set_xlim(-165, 135)
+    ax1.set_ylim(-125, 145)
+    ax1.set_zlim(5, 100)
     #    ax2 = plt.subplot(2, 3, 2, projection='3d')
     #    ax2.scatter(PerceptualSpace[:, 1], PerceptualSpace[:, 2], PerceptualSpace[:, 0], c=PerceptualModeMap)
     ax3 = plt.subplot(2, 2, 2, projection='3d')
@@ -91,6 +97,10 @@ def plot(PerceptualSpace, Priors, MunsellPalette, PerceptualModeMap, MunsellMode
     plt.imshow(tmpModeMap, interpolation='none')
     plt.show(block=block)
     plt.pause(0.01)
+
+
+def termToString(term):
+    return '<NA>' if term == -1 else 't' + str(term)
 
 
 def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filename, measurements_filename):
@@ -161,12 +171,12 @@ def run_simulation(PerceptualSpace, PMeaning, NForms, NGenerations, output_filen
     with open(output_filename, 'a') as mode_map_file:
         writer = csv.writer(mode_map_file)
         time = str(datetime.today())
-        writer.writerow([time, 0, 'A', 't' + str(MunsellModeMap[0])])
+        writer.writerow([time, 0, 'A', termToString(MunsellModeMap[0])])
         for r in xrange(NValues - 2):
             for c in xrange(NHues):
                 writer.writerow([time, c, ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'][r],
-                                 't' + str(MunsellModeMap[1 + r * NHues + c])])
-        writer.writerow([time, 0, 'J', 't' + str(MunsellModeMap[329])])
+                                 termToString(MunsellModeMap[1 + r * NHues + c])])
+        writer.writerow([time, 0, 'J', termToString(MunsellModeMap[329])])
 
     ExpectedUtility = sum(
         PMeaning[t1] * Speakers[t1, m] * Hearers[m, t2] * Sim[t1, t2] for t1 in xrange(NMeanings) for m in

@@ -2,7 +2,7 @@ library(ggplot2)
 
 source('data-analysis-functions.R')
 
-nterms <- 3
+nterms <- 4
 
 digits.rounding <- 3
 match.files <- c(paste(sep='-', 'results/Munsell', nterms, 'WCS.csv'),
@@ -39,7 +39,7 @@ print(ggplot(max.similarities, aes(x=max.value)) +
         geom_vline(xintercept=rkk.max.value, linetype='longdash') +
         theme(axis.title.x = element_blank()) +
         theme(axis.title.y = element_blank()) +
-        labs(title=paste(nterms, 'terms')))
+        labs(title=paste(nterms, 'terms')) + xlim(0.1,0.55))
 #ggplot(max.similarities, aes(x=model.name, y=max.value)) + geom_boxplot() + coord_flip()
 
 print(wilcox.test(subset(max.similarities, model.name == 'COM1')$max.value,
